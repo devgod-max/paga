@@ -8,6 +8,8 @@ import Dashboard from "../pages/Dashboard/UserDashboard";
 import MainLayout from "../layouts/MainLayout";
 import PaymentSummary from "../pages/PaymentSummary";
 import MerchantAuth from "../pages/Auth/MerchantAuth";
+import MerchantDashboard from "../pages/Dashboard/MerchantDashboard";
+import AuthNavbar from "../components/common/NavBar/AuthNavBar";
 
 export default function AppRouter() {
   const [user, setUser] = useState(null);
@@ -43,34 +45,75 @@ export default function AppRouter() {
   useEffect(() => {
     if (!initialCheckDone) return;
 
-    const isAuthPage = location.pathname === "/";
+    const isUserAuthPage = location.pathname === "/";
+    const isMerchantAuthPage = location.pathname === "/merchant";
 
     const publicPaths = ["/", "/merchant"];
 
+    // If not logged in and not on a public page, redirect to login
     if (!user && !publicPaths.includes(location.pathname)) {
       navigate("/", { replace: true });
+      return;
     }
 
-    if (user && isAuthPage) {
-      const storedRole = localStorage.getItem("role");
+    // If logged in and on an auth page, redirect to appropriate dashboard
+    if (user && (isUserAuthPage || isMerchantAuthPage)) {
+      const authUserStr = localStorage.getItem("authUser");
 
-      if (storedRole === "merchant") {
-        navigate("/merchant/dashboard", { replace: true });
-      } else {
-        navigate("/checkout", { replace: true });
+      try {
+        if (authUserStr) {
+          const authUser = JSON.parse(authUserStr);
+          const storedRole = authUser?.user_metadata?.role;
+
+          console.log(storedRole);
+
+          if (storedRole === "merchant") {
+            navigate("/merchant/dashboard", { replace: true });
+          } else {
+            navigate("/checkout", { replace: true });
+          }
+        } else {
+          // Fallback: redirect to /checkout or merchant dashboard using default
+          navigate("/checkout", { replace: true });
+        }
+      } catch (err) {
+        console.error("Error parsing authUser:", err);
+        navigate("/", { replace: true });
       }
     }
   }, [user, navigate, location.pathname, initialCheckDone]);
 
   return (
     <Routes>
-      <Route path="/" element={<Auth />} />
-      <Route path="/merchant/" element={<MerchantAuth />} />
+      <Route
+        path="/"
+        element={
+          <AuthNavbar role="user">
+            <Auth />
+          </AuthNavbar>
+        }
+      />
+      <Route
+        path="/merchant/"
+        element={
+          <AuthNavbar role="merchant">
+            <MerchantAuth />
+          </AuthNavbar>
+        }
+      />
       <Route
         path="/dashboard"
         element={
           <MainLayout>
             <Dashboard />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/merchant/dashboard"
+        element={
+          <MainLayout role="merchant">
+            <MerchantDashboard />
           </MainLayout>
         }
       />

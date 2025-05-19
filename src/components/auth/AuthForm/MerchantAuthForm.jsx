@@ -11,7 +11,6 @@ export default function MerchantAuthForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const toggleForm = () => setIsSignIn(!isSignIn);
 
   const handleSubmit = (e) => {

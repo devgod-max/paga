@@ -8,12 +8,11 @@ export const login = (email, password) => async (dispatch) => {
 
     if (response) {
       localStorage.setItem("authUser", JSON.stringify(response));
+      dispatch({
+        type: LOGIN,
+        payload: response, // Example: user info returned from API
+      });
     }
-
-    dispatch({
-      type: LOGIN,
-      payload: response, // Example: user info returned from API
-    });
   } catch (error) {
     console.error("Login failed:", error);
   }
@@ -26,12 +25,11 @@ export const signup = (email, username, role, password) => async (dispatch) => {
 
     if (response) {
       localStorage.setItem("authUser", JSON.stringify(response));
+      dispatch({
+        type: SET_USER,
+        payload: response, // Example: user info returned from signup API
+      });
     }
-
-    dispatch({
-      type: SET_USER,
-      payload: response.data, // Example: user info returned from signup API
-    });
   } catch (error) {
     console.error("Signup failed:", error);
   }

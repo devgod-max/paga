@@ -73,7 +73,6 @@ export const signupUser = async (email, username, role, password) => {
       }
 
       console.log("User created successfully.");
-      console.log(data.user);
       return user;
     }
 

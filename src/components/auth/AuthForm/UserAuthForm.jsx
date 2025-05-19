@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
-import { login, setUser, signup } from "../../../redux/auth/actions"; // Correctly import signup and login actions
+import { login, signup } from "../../../redux/auth/actions"; // Correctly import signup and login actions
 
 export default function AuthForm({ isSignIn, toggleForm }) {
   const [email, setEmail] = useState("");
