@@ -15,11 +15,6 @@ export default function PaymentMethodSelector() {
     navigate("/paymentsummary"); // ✅ Navigate to summary page
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut(); // Sign out the user
-    navigate("/", { replace: true }); // Redirect to login page
-  };
-
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-12 text-white text-center">
       {/* Welcome message */}
@@ -65,14 +60,6 @@ export default function PaymentMethodSelector() {
           text="text-blue-900"
         />
       </div>
-
-      {/* Back to Sign In */}
-      <button
-        onClick={handleSignOut} // or your desired route
-        className="mt-8 w-3/5 bg-white text-blue-900 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100 transition text-sm"
-      >
-        Back to Sign In
-      </button>
     </div>
   );
 }
