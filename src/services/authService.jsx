@@ -1,7 +1,7 @@
 import { supabase } from "../supabaseClient"; // Import supabase client
 
 // Login function
-export const loginUser = async (email, password) => {
+export const loginUser = async (email, password, role) => {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -12,6 +12,13 @@ export const loginUser = async (email, password) => {
     if (error) throw error;
 
     const user = data.user;
+
+    // Check if the role matches
+    if (user.user_metadata.role !== role) {
+      console.log("Role does not match. Please try again.");
+      alert("Role does not match.");
+      return null;
+    }
 
     // Check if the user's email is confirmed
     if (user && user.email_confirmed_at) {

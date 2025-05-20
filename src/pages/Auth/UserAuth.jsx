@@ -8,10 +8,10 @@ export default function Auth() {
   const toggleForm = () => setIsSignIn(!isSignIn);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 text-white px-4 py-12 flex items-center justify-center">
+    <div className="h-full flex flex-col justify-center items-center px-4">
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Left column */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Title */}
           <h1 className="text-5xl font-bold text-white">Customer Account</h1>
 
@@ -20,7 +20,7 @@ export default function Auth() {
         </div>
 
         {/* Right column */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           <div className="block md:hidden">
             <MobileTopIntro />
           </div>

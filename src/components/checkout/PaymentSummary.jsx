@@ -93,7 +93,7 @@ export default function PaymentSummary() {
   // console.log(isLoadingDetails);
   if (true) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white px-4 py-12 flex flex-col items-center relative">
+      <div className="w-full bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white px-4 py-12 flex flex-col items-center relative">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
           Welcome John Doe!
         </h1>

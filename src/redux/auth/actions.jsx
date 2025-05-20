@@ -2,9 +2,9 @@ import { LOGIN, LOGOUT, SET_USER } from "./types";
 import { signupUser, loginUser } from "../../services/authService"; // Correct import for authService
 
 // Login action
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, password, role) => async (dispatch) => {
   try {
-    const response = await loginUser(email, password);
+    const response = await loginUser(email, password, role);
 
     if (response) {
       localStorage.setItem("authUser", JSON.stringify(response));

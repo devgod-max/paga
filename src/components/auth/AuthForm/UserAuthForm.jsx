@@ -12,7 +12,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignIn) {
-      dispatch(login(email, password)); // Dispatch login action
+      dispatch(login(email, password, "user")); // Dispatch login action
     } else {
       if (password === confirmPassword) {
         dispatch(signup(email, username, "user", password)); // Dispatch signup action
