@@ -9,10 +9,11 @@ export default function AuthForm({ isSignIn, toggleForm }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSignIn) {
-      dispatch(login(email, password, "user")); // Dispatch login action
+      await dispatch(login(email, password, "user")); // Dispatch login action
+      window.location.reload();
     } else {
       if (password === confirmPassword) {
         dispatch(signup(email, username, "user", password)); // Dispatch signup action

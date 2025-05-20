@@ -17,7 +17,11 @@ export const loginUser = async (email, password, role) => {
     if (user.user_metadata.role !== role) {
       console.log("Role does not match. Please try again.");
       alert("Role does not match.");
-      return null;
+      const otherPage = role === "user" ? "merchant" : "customer";
+      await supabase.auth.signOut();
+      throw new Error(
+        `This page is for ${role}s. Try logging in as a ${otherPage}.`
+      );
     }
 
     // Check if the user's email is confirmed

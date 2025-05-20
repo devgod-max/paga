@@ -12,9 +12,10 @@ export default function Navbar() {
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = async () => {
-    store.dispatch(logout());
+    await store.dispatch(logout());
     await supabase.auth.signOut();
     navigate("/");
+    window.location.reload();
   };
 
   const navItems = [
