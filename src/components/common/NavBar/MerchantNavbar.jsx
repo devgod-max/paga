@@ -12,6 +12,7 @@ export default function MerchantNavbar() {
     store.dispatch(logout());
     await supabase.auth.signOut();
     navigate("/");
+    window.location.reload();
   };
 
   return (

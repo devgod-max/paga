@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import { login, signup } from "../../../redux/auth/actions"; // Correctly import signup and login actions
 
@@ -8,18 +9,27 @@ export default function AuthForm({ isSignIn, toggleForm }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSignIn) {
       await dispatch(login(email, password, "user")); // Dispatch login action
-      window.location.reload();
     } else {
       if (password === confirmPassword) {
-        dispatch(signup(email, username, "user", password)); // Dispatch signup action
+        await dispatch(signup(email, username, "user", password)); // Dispatch signup action
       } else {
         alert("Passwords do not match.");
       }
+    }
+
+    const user = JSON.parse(localStorage.getItem("authUser"));
+    if (user?.user_metadata?.role === "user") {
+      // If the user is a user, navigate to the customer dashboard
+      navigate("/checkout");
+      window.location.reload();
+    } else {
+      console.log("alert");
     }
   };
 

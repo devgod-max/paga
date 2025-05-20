@@ -13,16 +13,26 @@ export default function MerchantAuthForm() {
   const navigate = useNavigate();
   const toggleForm = () => setIsSignIn(!isSignIn);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSignIn) {
-      dispatch(login(email, password, "merchant", navigate)); // Optional: pass role or navigate
+      await dispatch(login(email, password, "merchant", navigate)); // Optional: pass role or navigate
     } else {
       if (password !== confirmPassword) {
         alert("Passwords do not match.");
         return;
       }
-      dispatch(signup(email, username, "merchant", password, navigate)); // Reuse logic but pass "merchant"
+      await dispatch(signup(email, username, "merchant", password, navigate)); // Reuse logic but pass "merchant"
+    }
+
+    const user = JSON.parse(localStorage.getItem("authUser"));
+
+    if (user?.user_metadata?.role === "merchant") {
+      // If the user is a merchant, navigate to the merchant dashboard
+      navigate("/merchant/dashboard");
+      window.location.reload();
+    } else {
+      console.log("alert");
     }
   };
 
@@ -37,6 +47,17 @@ export default function MerchantAuthForm() {
           : "Create merchant account"}
       </h2>
 
+      <div>
+        <label className="block text-sm mb-1">Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-4 py-2 rounded-lg border"
+          placeholder="merchant@example.com"
+        />
+      </div>
+
       {!isSignIn && (
         <div>
           <label className="block text-sm mb-1">Username</label>
@@ -49,17 +70,6 @@ export default function MerchantAuthForm() {
           />
         </div>
       )}
-
-      <div>
-        <label className="block text-sm mb-1">Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-2 rounded-lg border"
-          placeholder="merchant@example.com"
-        />
-      </div>
 
       <div>
         <label className="block text-sm mb-1">Password</label>

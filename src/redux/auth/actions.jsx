@@ -8,7 +8,7 @@ export const login = (email, password, role) => async (dispatch) => {
 
     if (response) {
       localStorage.setItem("authUser", JSON.stringify(response));
-      dispatch({
+      await dispatch({
         type: LOGIN,
         payload: response, // Example: user info returned from API
       });
@@ -25,7 +25,7 @@ export const signup = (email, username, role, password) => async (dispatch) => {
 
     if (response) {
       localStorage.setItem("authUser", JSON.stringify(response));
-      dispatch({
+      await dispatch({
         type: SET_USER,
         payload: response, // Example: user info returned from signup API
       });

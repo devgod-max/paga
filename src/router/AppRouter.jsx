@@ -19,20 +19,16 @@ export default function AppRouter() {
     // const init = async () => {
     //   const { data: sessionData } = await supabase.auth.getSession();
     //   const sessionUser = sessionData?.session?.user;
-
     //   if (sessionUser) {
     //     setUser(sessionUser);
     //   }
-
     //   supabase.auth.onAuthStateChange((_event, session) => {
+    //     console.log(session);
     //     setUser(session?.user || null);
     //   });
-
     //   setLoading(false);
     // };
-
     // init();
-
     const user = JSON.parse(localStorage.getItem("authUser"));
     setUser(user);
     setLoading(false);
