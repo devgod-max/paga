@@ -7,6 +7,7 @@ import {
 const initialState = {
   method: null, // e.g. "crypto", "credit", "bank"
   details: {}, // e.g. coin, amount, card info, etc.
+  status: "idle",
 };
 
 const checkoutReducer = (state = initialState, action) => {

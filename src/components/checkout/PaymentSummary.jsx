@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
-import { fetchCheckoutData } from "../../redux/checkout/checkoutActions";
+import {
+  fetchCheckoutData,
+  resetCheckout,
+} from "../../redux/checkout/checkoutActions";
 
 export default function PaymentSummary() {
   const [processing, setProcessing] = useState(false);
@@ -74,6 +77,7 @@ export default function PaymentSummary() {
   };
 
   const goBack = () => {
+    dispatch(resetCheckout());
     navigate("/checkout");
   };
 
@@ -84,8 +88,8 @@ export default function PaymentSummary() {
         ).toFixed(4)}) Now`
       : `Pay $${details?.usdPrice} Now`;
 
-  // if (Object.keys(details).length === 0)
-  //   return <p className="text-white text-center">Loading...</p>;
+  if (Object.keys(details).length === 0)
+    return <p className="text-white text-center">Loading...</p>;
 
   // const isLoadingDetails = !details || Object.keys(details).length === 0;
   // console.log(!details);
@@ -93,7 +97,7 @@ export default function PaymentSummary() {
   // console.log(isLoadingDetails);
   if (true) {
     return (
-      <div className="w-full bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white px-4 py-12 flex flex-col items-center relative">
+      <div className="w-full bg-gradient-to-br from-blue-600 via-blue-700 t-blue-800 text-white px-4 py-8 flex flex-col items-center relative">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
           Welcome John Doe!
         </h1>

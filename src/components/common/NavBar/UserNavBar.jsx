@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { supabase } from "../../../supabaseClient";
 import store from "../../../redux/store";
 import { logout } from "../../../redux/auth/actions";
 import { Menu, X, UserCircle } from "lucide-react";
+import { resetCheckout } from "../../../redux/checkout/checkoutActions";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null); // Ref to track the dropdown
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     store.dispatch(logout());
@@ -59,7 +61,12 @@ export default function Navbar() {
           {navItems.map((item) => (
             <button
               key={item.name}
-              onClick={() => navigate(item.path)}
+              onClick={() => {
+                if (item.name === "Checkout") {
+                  dispatch(resetCheckout());
+                }
+                navigate(item.path);
+              }}
               className="hover:underline"
             >
               {item.name}
