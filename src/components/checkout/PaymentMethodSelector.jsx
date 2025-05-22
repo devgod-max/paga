@@ -1,18 +1,22 @@
-import { useDispatch } from "react-redux";
-import { supabase } from "../../supabaseClient";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { setPaymentMethod } from "../../redux/checkout/checkoutActions";
+import { setPaymentMethod_1 } from "../../redux/checkout/checkoutActions";
 
 import PaymentOptionCard from "../common/PaymentOptionCard";
+import LoadingPage from "../common/LoadingPage";
 
 export default function PaymentMethodSelector() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { status } = useSelector((status) => status.auth);
 
-  const handleSelectMethod = (method) => {
-    dispatch(setPaymentMethod(method)); // ✅ Set payment method in Redux
-    navigate("/paymentsummary"); // ✅ Navigate to summary page
+  if (status === "loading") return <LoadingPage />;
+  if (status === "fail") return <div>Error:</div>;
+
+  const handleSelectMethod_1 = (method) => {
+    dispatch(setPaymentMethod_1(method));
+    navigate("/paymentsource");
   };
 
   return (
@@ -35,7 +39,7 @@ export default function PaymentMethodSelector() {
           label="Pay"
           description="Fast & secure"
           bg="bg-white"
-          onClick={() => handleSelectMethod("crypto")}
+          onClick={() => handleSelectMethod_1("crypto")}
         />
 
         {/* Credit Card Option */}
@@ -44,7 +48,7 @@ export default function PaymentMethodSelector() {
           icon="💳"
           label="Pay"
           description="Familiar & trusted"
-          onClick={() => handleSelectMethod("card")}
+          onClick={() => handleSelectMethod_1("card")}
           bg="bg-white"
           text="text-blue-900"
         />
@@ -55,7 +59,7 @@ export default function PaymentMethodSelector() {
           icon="🏦"
           label="Pay"
           description="Low fees"
-          onClick={() => handleSelectMethod("bank")}
+          onClick={() => handleSelectMethod_1("bank")}
           bg="bg-white"
           text="text-blue-900"
         />

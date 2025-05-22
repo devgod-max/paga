@@ -1,8 +1,9 @@
-import { LOGIN, LOGOUT, SET_USER } from "./types";
+import { LOGIN, LOGOUT, SET_USER, SET_STATUS } from "./types";
 import { signupUser, loginUser } from "../../services/authService"; // Correct import for authService
 
 // Login action
 export const login = (email, password, role) => async (dispatch) => {
+  await dispatch(setStatus("loading"));
   try {
     const response = await loginUser(email, password, role);
 
@@ -12,9 +13,11 @@ export const login = (email, password, role) => async (dispatch) => {
         type: LOGIN,
         payload: response, // Example: user info returned from API
       });
+      await dispatch(setStatus("success"));
     }
   } catch (error) {
     console.error("Login failed:", error);
+    dispatch(setStatus("error"));
   }
 };
 
@@ -48,5 +51,12 @@ export const setUser = (user) => {
   return {
     type: SET_USER,
     payload: user,
+  };
+};
+
+export const setStatus = (status) => {
+  return {
+    type: SET_STATUS,
+    payload: status,
   };
 };

@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import PaymentMethodSelection from "./components/PaymentMethodSelection";
 import PaymentSummary from "./components/PaymentSummary";
 import CustomerDashboard from "./components/CustomerDashboard";
+import MerchantLogin from "./temp_code/MerchantLogin";
+import MerchantDashboard from "./temp_code/merchantdashboard";
 
 export const AuthContext = createContext();
 function App() {
@@ -25,6 +27,8 @@ function App() {
             <Route path="/paymentmethod" element={<PaymentMethodSelection />} />
             <Route path="/paymentsummary" element={<PaymentSummary />} />
             <Route path="/customerdashboard" element={<CustomerDashboard />} />
+            <Route path="/merchantlogin" element={<MerchantLogin />} />
+            <Route path="/merchantdashboard" element={<MerchantDashboard />} />
           </Routes>
         </AuthContext.Provider>
       </BrowserRouter>

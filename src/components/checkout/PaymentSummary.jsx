@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 import {
+  fetchCardAndBankData,
   fetchCheckoutData,
-  resetCheckout,
+  setPaymentMethod_1,
 } from "../../redux/checkout/checkoutActions";
 
 export default function PaymentSummary() {
@@ -13,13 +14,18 @@ export default function PaymentSummary() {
   const [success, setSuccess] = useState(false);
 
   const dispatch = useDispatch();
-  const { method, details } = useSelector((state) => state.checkout);
+  const { details } = useSelector((state) => state.checkout);
+  const method = sessionStorage.getItem("method_1");
 
   useEffect(() => {
     if (method) {
+      const user_id = JSON.parse(localStorage.getItem("authUser")).id;
+      dispatch(fetchCardAndBankData(user_id));
+      const method_1 = sessionStorage.getItem("method_1");
+      dispatch(setPaymentMethod_1(method_1));
       dispatch(fetchCheckoutData(method));
     }
-  }, [dispatch, method]);
+  }, [dispatch]);
 
   const navigate = useNavigate();
 
@@ -77,8 +83,8 @@ export default function PaymentSummary() {
   };
 
   const goBack = () => {
-    dispatch(resetCheckout());
-    navigate("/checkout");
+    // dispatch(resetCheckout());
+    navigate("/paymentsource");
   };
 
   const buttonLabel =

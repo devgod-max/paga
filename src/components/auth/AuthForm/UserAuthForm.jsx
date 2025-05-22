@@ -15,21 +15,14 @@ export default function AuthForm({ isSignIn, toggleForm }) {
     e.preventDefault();
     if (isSignIn) {
       await dispatch(login(email, password, "user")); // Dispatch login action
-    } else {
-      if (password === confirmPassword) {
-        await dispatch(signup(email, username, "user", password)); // Dispatch signup action
-      } else {
-        alert("Passwords do not match.");
-      }
-    }
-
-    const user = JSON.parse(localStorage.getItem("authUser"));
-    if (user?.user_metadata?.role === "user") {
-      // If the user is a user, navigate to the customer dashboard
       navigate("/checkout");
       window.location.reload();
     } else {
-      console.log("alert");
+      if (password === confirmPassword) {
+        dispatch(signup(email, username, "user", password)); // Dispatch signup action
+      } else {
+        alert("Passwords do not match.");
+      }
     }
   };
 

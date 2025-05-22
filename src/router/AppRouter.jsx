@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient";
 import Auth from "../pages/Auth/UserAuth";
 import MerchantAuth from "../pages/Auth/MerchantAuth";
 import Dashboard from "../pages/Dashboard/UserDashboard";
@@ -9,6 +8,7 @@ import Checkout from "../pages/Checkout";
 import PaymentSummary from "../pages/PaymentSummary";
 import MainLayout from "../layouts/MainLayout";
 import AuthNavbar from "../components/common/NavBar/AuthNavBar";
+import PaymentSourceSelector from "../components/checkout/PaymentSourceSelector";
 import { PublicRoute, UserRoute, MerchantRoute } from "./ProtectedRoute";
 
 export default function AppRouter() {
@@ -73,6 +73,14 @@ export default function AppRouter() {
           element={
             <MainLayout>
               <Checkout />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/paymentsource"
+          element={
+            <MainLayout>
+              <PaymentSourceSelector />
             </MainLayout>
           }
         />

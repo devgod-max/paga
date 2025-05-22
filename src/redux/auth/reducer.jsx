@@ -1,8 +1,9 @@
-import { LOGIN, LOGOUT, SET_USER } from "./types";
+import { LOGIN, LOGOUT, SET_STATUS, SET_USER } from "./types";
 
 const initialState = {
   user: null, // Store user data
   isAuthenticated: false, // Track authentication status
+  status: "idle",
 };
 
 const authReducer = (state = initialState, action) => {
@@ -24,6 +25,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload, // Manually set user info
         isAuthenticated: true,
+      };
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.payload,
       };
     default:
       return state;
