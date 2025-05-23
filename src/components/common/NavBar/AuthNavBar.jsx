@@ -8,25 +8,25 @@ export default function AuthNavbar({ role = "user", children }) {
   const isUser = role === "user";
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 text-white">
-      {/* Navbar - 10% of screen */}
-      <header className="basis-[10%] flex-shrink-0 bg-black/30 backdrop-blur z-50 shadow-md flex items-center">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center w-full">
+    <div className="min-h-screen flex flex-col bg-white text-black">
+      {/* Header */}
+      <header className="w-full shadow-sm border-b border-gray-200 sticky top-0 z-50 bg-white">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <h1
             onClick={() => navigate("/")}
-            className="text-3xl font-bold tracking-wide cursor-pointer text-cyan-300"
+            className="text-2xl font-bold cursor-pointer"
           >
             🚀 PAGA
           </h1>
 
           {/* Desktop Switch Link */}
-          <div className="hidden md:flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg shadow text-sm font-medium text-white">
+          <div className="hidden md:flex items-center gap-2 text-sm font-medium">
             {isUser ? (
               <>
                 <span>Are you a merchant?</span>
                 <button
                   onClick={() => navigate("/merchant")}
-                  className="text-cyan-300 hover:underline"
+                  className="text-blue-600 hover:underline"
                 >
                   Login here
                 </button>
@@ -36,7 +36,7 @@ export default function AuthNavbar({ role = "user", children }) {
                 <span>Are you a customer?</span>
                 <button
                   onClick={() => navigate("/")}
-                  className="text-cyan-300 hover:underline"
+                  className="text-blue-600 hover:underline"
                 >
                   Login here
                 </button>
@@ -46,50 +46,52 @@ export default function AuthNavbar({ role = "user", children }) {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden"
+            className="md:hidden text-gray-600"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Menu"
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden px-4 py-2 text-sm border-t border-gray-200 bg-white">
+            {isUser ? (
+              <p>
+                Are you a merchant?{" "}
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate("/merchant");
+                  }}
+                  className="text-blue-600 hover:underline font-medium"
+                >
+                  Login here
+                </button>
+              </p>
+            ) : (
+              <p>
+                Are you a customer?{" "}
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate("/");
+                  }}
+                  className="text-blue-600 hover:underline font-medium"
+                >
+                  Login here
+                </button>
+              </p>
+            )}
+          </div>
+        )}
       </header>
 
-      {/* Mobile Switch (not fixed, just flows below header) */}
-      {menuOpen && (
-        <div className="md:hidden px-4 pb-2 space-y-2 text-sm bg-black/30">
-          {isUser ? (
-            <>
-              Are you a merchant?{" "}
-              <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  navigate("/merchant");
-                }}
-                className="text-blue-200 hover:underline font-medium"
-              >
-                Login here
-              </button>
-            </>
-          ) : (
-            <>
-              Are you a customer?{" "}
-              <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  navigate("/");
-                }}
-                className="text-blue-200 hover:underline font-medium"
-              >
-                Login here
-              </button>
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Content - takes remaining 90% */}
-      <main className="basis-[90%] overflow-auto w-full">{children}</main>
+      {/* Page content */}
+      <main className="flex-1 w-full flex items-center justify-center">
+        {children}
+      </main>
     </div>
   );
 }
