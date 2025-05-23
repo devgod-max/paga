@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import { supabase } from "../../../supabaseClient";
 import store from "../../../redux/store";
 import { logout } from "../../../redux/auth/actions";
-import { UserCircle } from "lucide-react";
+import { Sun, Moon, UserCircle, Search, CircleDot } from "lucide-react";
 
 export default function MerchantNavbar() {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null); // Ref to track the dropdown
+  const [darkMode, setDarkMode] = useState(false);
+  const dropdownRef = useRef(null);
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = async () => {
@@ -19,61 +20,78 @@ export default function MerchantNavbar() {
     window.location.reload();
   };
 
-  // Close the dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false); // Close dropdown when clicked outside
+        setDropdownOpen(false);
       }
     };
-
-    // Add event listener for clicks outside the dropdown
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup event listener on component unmount
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center text-gray-800">
+    <header className="w-full bg-white border border-gray-200 rounded-full p-2 px-4 shadow-sm mt-4 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between gap-4">
         {/* Logo */}
-        <h1
-          onClick={() => navigate("/merchant/dashboard")}
-          className="text-2xl font-semibold tracking-tight cursor-pointer"
-        >
-          Paga Merchant
-        </h1>
-
-        {/* Nav Links + User */}
-        <div className="flex items-center space-x-6">
-          <button
-            onClick={() => navigate("/merchant/dashboard")}
-            className="text-sm hover:text-blue-600"
-          >
-            Dashboard
+        <div className="flex items-center">
+          <button onClick={() => navigate("/merchant/dashboard")}>
+            <CircleDot className="w-6 h-6 text-black" />
           </button>
-          <div className="relative">
-            {/* User Info and Dropdown Toggle */}
-            <div
-              onClick={() => setDropdownOpen(!dropdownOpen)} // Toggle dropdown
-              className="flex items-center gap-2 cursor-pointer pl-4 border-l text-sm text-gray-600"
+        </div>
+
+        {/* Search bar */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="w-full max-w-md flex items-center bg-white border border-black rounded-full px-4 py-2">
+            <input
+              type="text"
+              placeholder="Search"
+              className="flex-1 bg-transparent outline-none text-sm"
+            />
+            <Search size={16} className="text-black" />
+          </div>
+        </div>
+
+        {/* Right Side: Theme Toggle + User Dropdown */}
+        <div className="flex items-center gap-4">
+          {/* Dark mode toggle pill */}
+          <div className="bg-gray-200 rounded-full px-1 py-1 flex items-center">
+            <button
+              className={`p-1 rounded-full ${
+                !darkMode ? "bg-black text-white" : "text-gray-400"
+              }`}
+              onClick={() => setDarkMode(false)}
             >
-              <UserCircle size={22} className="text-cyan-300" />
-              <span className="truncate">{user?.email}</span>
+              <Sun size={18} />
+            </button>
+            <button
+              className={`p-1 rounded-full ${
+                darkMode ? "bg-black text-white" : "text-gray-400"
+              }`}
+              onClick={() => setDarkMode(true)}
+            >
+              <Moon size={18} />
+            </button>
+          </div>
+
+          {/* User info + dropdown */}
+          <div className="relative">
+            <div
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-2 cursor-pointer text-sm text-gray-600"
+            >
+              <UserCircle size={22} className="text-cyan-400" />
+              <span className="truncate max-w-[120px]">{user?.email}</span>
             </div>
 
-            {/* Simplified Dropdown Menu */}
             {dropdownOpen && (
               <div
-                ref={dropdownRef} // Attach the ref to the dropdown
-                className="absolute right-0 mt-2 w-40 bg-white text-black border border-gray-300 rounded-lg p-2"
+                ref={dropdownRef}
+                className="absolute right-0 mt-2 w-40 bg-white text-black border border-gray-300 rounded-lg p-2 shadow"
               >
                 <button
                   onClick={handleLogout}
-                  className="block w-full text-left px-4 py-2 text-black-500 hover:bg-gray-100 rounded-b-lg"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded"
                 >
                   Logout
                 </button>
