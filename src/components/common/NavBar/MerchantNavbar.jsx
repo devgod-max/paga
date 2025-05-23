@@ -4,11 +4,20 @@ import { useSelector } from "react-redux";
 import { supabase } from "../../../supabaseClient";
 import store from "../../../redux/store";
 import { logout } from "../../../redux/auth/actions";
-import { Sun, Moon, UserCircle, Search, CircleDot } from "lucide-react";
+import {
+  Sun,
+  Moon,
+  UserCircle,
+  Search,
+  CircleDot,
+  Menu,
+  X,
+} from "lucide-react";
 
 export default function MerchantNavbar() {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const dropdownRef = useRef(null);
   const user = useSelector((state) => state.auth.user);
@@ -24,6 +33,7 @@ export default function MerchantNavbar() {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
+        setMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -40,8 +50,8 @@ export default function MerchantNavbar() {
           </button>
         </div>
 
-        {/* Search bar */}
-        <div className="flex-1 flex items-center justify-center">
+        {/* Search - Desktop only */}
+        <div className="flex-1 items-center justify-center hidden md:flex">
           <div className="w-full max-w-md flex items-center bg-white border border-black rounded-full px-4 py-2">
             <input
               type="text"
@@ -52,10 +62,10 @@ export default function MerchantNavbar() {
           </div>
         </div>
 
-        {/* Right Side: Theme Toggle + User Dropdown */}
+        {/* Right: Darkmode, User, Hamburger */}
         <div className="flex items-center gap-4">
-          {/* Dark mode toggle pill */}
-          <div className="bg-gray-200 rounded-full px-1 py-1 flex items-center">
+          {/* Dark Mode Toggle - hidden on mobile */}
+          <div className="bg-gray-200 rounded-full px-1 py-1 hidden md:flex items-center">
             <button
               className={`p-1 rounded-full ${
                 !darkMode ? "bg-black text-white" : "text-gray-400"
@@ -74,8 +84,8 @@ export default function MerchantNavbar() {
             </button>
           </div>
 
-          {/* User info + dropdown */}
-          <div className="relative">
+          {/* User Dropdown - desktop only */}
+          <div className="relative hidden md:block">
             <div
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center gap-2 cursor-pointer text-sm text-gray-600"
@@ -98,8 +108,35 @@ export default function MerchantNavbar() {
               </div>
             )}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Dropdown */}
+      {menuOpen && (
+        <div className="md:hidden mt-2 bg-white border border-gray-200 rounded-lg p-4 shadow text-sm space-y-2">
+          <button
+            onClick={() => navigate("/merchant/dashboard")}
+            className="block w-full text-left py-2 hover:underline"
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={handleLogout}
+            className="block w-full text-left py-2 hover:underline"
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </header>
   );
 }
