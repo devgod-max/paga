@@ -18,10 +18,10 @@ export default function AuthForm({ isSignIn, toggleForm }) {
     if (isSignIn) {
       await dispatch(login(email, password, "user"));
       navigate("/checkout");
-      window.location.reload();
     } else {
       if (password === confirmPassword) {
-        dispatch(signup(email, username, "user", password));
+        await dispatch(signup(email, username, "user", password));
+        navigate("/checkout");
       } else {
         alert("Passwords do not match.");
       }

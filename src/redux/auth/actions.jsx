@@ -3,7 +3,7 @@ import { signupUser, loginUser } from "../../services/authService"; // Correct i
 
 // Login action
 export const login = (email, password, role) => async (dispatch) => {
-  await dispatch(setStatus("loading"));
+  dispatch(setStatus("loading"));
   try {
     const response = await loginUser(email, password, role);
 
@@ -13,7 +13,7 @@ export const login = (email, password, role) => async (dispatch) => {
         type: LOGIN,
         payload: response, // Example: user info returned from API
       });
-      await dispatch(setStatus("success"));
+      dispatch(setStatus("success"));
     }
   } catch (error) {
     console.error("Login failed:", error);
@@ -23,6 +23,7 @@ export const login = (email, password, role) => async (dispatch) => {
 
 // Signup action
 export const signup = (email, username, role, password) => async (dispatch) => {
+  dispatch(setStatus("loading"));
   try {
     const response = await signupUser(email, username, role, password); // Assuming signupUser is defined in authService
 
@@ -32,9 +33,11 @@ export const signup = (email, username, role, password) => async (dispatch) => {
         type: SET_USER,
         payload: response, // Example: user info returned from signup API
       });
+      dispatch(setStatus("success"));
     }
   } catch (error) {
     console.error("Signup failed:", error);
+    dispatch(setStatus("error"));
   }
 };
 

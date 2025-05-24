@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { setPaymentMethod_1 } from "../../redux/checkout/checkoutActions";
 
 import PaymentOptionCard from "../common/PaymentOptionCard";
-import LoadingScreen from "../common/LoadingScreen";
 
 export default function PaymentMethodSelector() {
   const navigate = useNavigate();
@@ -17,9 +16,6 @@ export default function PaymentMethodSelector() {
     const user = JSON.parse(localStorage.getItem("authUser"));
     setUsername(user.user_metadata.name);
   }, [status]);
-
-  if (status === "loading") return <LoadingScreen />;
-  if (status === "fail") return <div>Error:</div>;
 
   const handleSelectMethod_1 = (method) => {
     dispatch(setPaymentMethod_1(method));

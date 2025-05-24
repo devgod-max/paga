@@ -1,5 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Auth from "../pages/Auth/UserAuth";
 import MerchantAuth from "../pages/Auth/MerchantAuth";
 import Dashboard from "../pages/Dashboard/UserDashboard";
@@ -10,36 +11,22 @@ import MainLayout from "../layouts/MainLayout";
 import AuthNavbar from "../components/common/NavBar/AuthNavBar";
 import PaymentSourceSelector from "../components/checkout/PaymentSourceSelector";
 import { PublicRoute, UserRoute, MerchantRoute } from "./ProtectedRoute";
+import LoadingScreen from "../components/common/LoadingScreen";
 
 export default function AppRouter() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
 
+  const { user, status } = useSelector((state) => state.auth);
   useEffect(() => {
-    // const init = async () => {
-    //   const { data: sessionData } = await supabase.auth.getSession();
-    //   const sessionUser = sessionData?.session?.user;
-    //   if (sessionUser) {
-    //     setUser(sessionUser);
-    //   }
-    //   supabase.auth.onAuthStateChange((_event, session) => {
-    //     console.log(session);
-    //     setUser(session?.user || null);
-    //   });
-    //   setLoading(false);
-    // };
-    // init();
-    const user = JSON.parse(localStorage.getItem("authUser"));
-    setUser(user);
-    setLoading(false);
-  }, []);
+    setCurrentUser(user);
+  }, [user]);
 
-  if (loading) return <div>Loading...</div>;
+  if (status === "loading") return <LoadingScreen message="Signing in......" />;
 
   return (
     <Routes>
       {/* PUBLIC ROUTES */}
-      <Route element={<PublicRoute user={user} />}>
+      <Route element={<PublicRoute user={currentUser} />}>
         <Route
           path="/"
           element={

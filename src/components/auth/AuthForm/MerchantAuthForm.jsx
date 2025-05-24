@@ -20,18 +20,14 @@ export default function MerchantAuthForm() {
     e.preventDefault();
     if (isSignIn) {
       await dispatch(login(email, password, "merchant", navigate));
+      navigate("/merchant/dashboard");
     } else {
       if (password !== confirmPassword) {
         alert("Passwords do not match.");
         return;
       }
       await dispatch(signup(email, username, "merchant", password, navigate));
-    }
-
-    const user = JSON.parse(localStorage.getItem("authUser"));
-    if (user?.user_metadata?.role === "merchant") {
       navigate("/merchant/dashboard");
-      window.location.reload();
     }
   };
 
