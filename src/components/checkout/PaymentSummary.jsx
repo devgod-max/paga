@@ -2,241 +2,232 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
-
 import {
   fetchCardAndBankData,
   fetchCheckoutData,
   setPaymentMethod_1,
 } from "../../redux/checkout/checkoutActions";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ShieldCheck,
+  Gift,
+  Loader2,
+} from "lucide-react";
+
+import LoadingScreen from "../common/LoadingScreen";
 
 export default function PaymentSummary() {
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [rewardsEarned, setRewardsEarned] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState("");
 
   const dispatch = useDispatch();
   const { details } = useSelector((state) => state.checkout);
   const method = sessionStorage.getItem("method_1");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (method) {
-      const user_id = JSON.parse(localStorage.getItem("authUser")).id;
-      dispatch(fetchCardAndBankData(user_id));
-      const method_1 = sessionStorage.getItem("method_1");
-      dispatch(setPaymentMethod_1(method_1));
-      dispatch(fetchCheckoutData(method));
-    }
+    const loadData = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem("authUser"));
+        dispatch(setPaymentMethod_1(method));
+        setUsername(user.user_metadata.name);
+        await dispatch(fetchCardAndBankData(user.id));
+        await dispatch(fetchCheckoutData(method));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (method) loadData();
   }, [dispatch]);
 
-  const navigate = useNavigate();
+  if (loading || !details || Object.keys(details).length === 0) {
+    return <LoadingScreen message="Loading payment summary..." />;
+  }
 
   const handlePayment = async () => {
     try {
       setProcessing(true);
-
       const authUser = await supabase.auth.getUser();
       const user = authUser.data?.user;
-
       if (!user) throw new Error("User not authenticated");
 
-      const { error: purchaseError } = await supabase
-        .from("purchase_history")
-        .insert([
-          {
-            user_email: user.email,
-            item: details.item,
-            amount_paid:
-              method === "crypto" ? details.cryptoPrice : details.usdPrice,
-            payment_method: method,
-            points:
-              method === "crypto"
-                ? Math.floor(details.cryptoPrice * details.rate * 0.05)
-                : Math.floor(details.usdPrice * 0.05),
-            status: "Completed",
-            merchant_name: details.merchant_name,
-          },
-        ]);
-
-      if (purchaseError) throw purchaseError;
-
       const rewardAmount = Math.floor(details.usdPrice * 0.05);
+      const cryptoAmount =
+        method === "crypto" ? details.cryptoPrice : details.usdPrice;
 
-      const { error: rewardError } = await supabase
-        .from("reward_history")
-        .insert([
-          {
-            user_email: user.email,
-            tokens: rewardAmount,
-            source: "Purchase Cashback",
-            note: `5% reward on ${details.item}`,
-          },
-        ]);
+      await supabase.from("purchase_history").insert([
+        {
+          user_email: user.email,
+          item: details.item,
+          amount_paid: cryptoAmount,
+          payment_method: method,
+          points: rewardAmount,
+          status: "Completed",
+          merchant_name: details.merchant_name,
+        },
+      ]);
 
-      if (rewardError) throw rewardError;
+      await supabase.from("reward_history").insert([
+        {
+          user_email: user.email,
+          tokens: rewardAmount,
+          source: "Purchase Cashback",
+          note: `5% reward on ${details.item}`,
+        },
+      ]);
 
+      setRewardsEarned(rewardAmount);
       setSuccess(true);
     } catch (err) {
-      console.error("Payment failed:", err.message || err);
+      console.error("Payment failed:", err);
       alert("Payment failed. Please try again.");
     } finally {
       setProcessing(false);
     }
   };
 
-  const goBack = () => {
-    // dispatch(resetCheckout());
-    navigate("/paymentsource");
-  };
-
   const buttonLabel =
     method === "crypto"
-      ? `Pay ${details?.cryptoPrice?.toFixed(4)} ETH ($${(
+      ? `Pay (${details?.cryptoPrice?.toFixed(4)} ETH) $${(
           details?.cryptoPrice * details?.rate
-        ).toFixed(4)}) Now`
+        ).toFixed(2)} Now`
       : `Pay $${details?.usdPrice} Now`;
 
-  if (Object.keys(details).length === 0)
-    return <p className="text-white text-center">Loading...</p>;
+  const goBack = () => navigate("/paymentsource");
 
-  // const isLoadingDetails = !details || Object.keys(details).length === 0;
-  // console.log(!details);
-  // console.log(Object.keys(details).length === 0);
-  // console.log(isLoadingDetails);
-  if (true) {
-    return (
-      <div className="w-full bg-gradient-to-br from-blue-600 via-blue-700 t-blue-800 text-white px-4 py-8 flex flex-col items-center relative">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
-          Welcome John Doe!
-        </h1>
-        <p className="text-md md:text-lg text-blue-100 mb-6 text-center">
-          Pay with Crypto
-        </p>
+  return (
+    <div className="w-full bg-white text-black px-4 py-8 flex flex-col items-center">
+      <h1 className="text-3xl font-bold text-center mb-1">
+        Welcome {username}!
+      </h1>
+      <p className="text-gray-500 text-sm mb-8">Pay with {method}</p>
 
-        <div className="bg-white/10 border border-white/30 backdrop-blur rounded-xl p-6 md:p-8 w-full max-w-md text-sm md:text-base relative">
-          <h2 className="text-lg font-semibold mb-4 border-b border-white/20 pb-2">
-            Summary
-          </h2>
-          <div className="space-y-2">
-            <p>
-              <span className="font-medium">Item:</span> {details?.item || "—"}
-            </p>
-            <p>
-              <span className="font-medium">Quantity:</span> 1
-            </p>
-            <p>
-              <span className="font-medium">Payment Method:</span> {method}
-            </p>
+      <div className="w-full max-w-2xl border border-gray-200 rounded-2xl p-6 md:p-8">
+        <h2 className="text-xl font-semibold mb-4">Summary</h2>
 
-            {method === "crypto" && (
-              <div className="flex items-center justify-between">
-                <label htmlFor="cryptoType" className="font-medium">
-                  Crypto Type:
-                </label>
-                <select className="bg-blue-600 text-white px-3 py-2 rounded focus:outline-none">
-                  <option className="text-black">ETH</option>
-                  {/* <option className="text-black">BTC</option>
-                  <option className="text-black">USDC</option> */}
+        <div className="space-y-3 text-sm">
+          <SummaryRow label="Item" value="1-month membership" />
+          <SummaryRow label="Quantity" value="1" />
+          {method === "crypto" && (
+            <SummaryRow
+              label="Crypto Type"
+              value={
+                <select className="border border-gray-200 rounded px-2 py-1 bg-white text-sm">
+                  <option value="ETH">ETH</option>
                 </select>
-              </div>
-            )}
-
-            <p>
-              <span className="font-medium">Price:</span>{" "}
-              {method === "crypto"
-                ? details?.cryptoPrice?.toFixed(4) +
-                  "($" +
-                  (details?.cryptoPrice * details?.rate).toFixed(4) +
-                  ")"
-                : "$" + details.usdPrice}
-            </p>
-            <p>
-              <span className="font-medium">Fees:</span>{" "}
-              {method === "crypto"
-                ? (details?.cryptoPrice / 50).toFixed(4) +
-                  ("  ($" +
-                    ((details?.cryptoPrice * details?.rate) / 50).toFixed(4) +
-                    ")")
-                : "$" + (details?.usdPrice / 50).toFixed(4)}
-            </p>
-            {method === "crypto" && (
-              <p>
-                <span className="font-medium">Conversion:</span> 1 ETH ={" "}
-                {"$" + details?.rate}
-              </p>
-            )}
-            <p>
-              <span className="font-medium">Rewards:</span> 5% cashback ={" "}
-              {details?.usdPrice
-                ? (details.usdPrice * 0.05).toFixed(4)
-                : details?.cryptoPrice
-                ? (details.cryptoPrice * 0.05).toFixed(4)
-                : "0"}{" "}
-              tokens
-            </p>
-            <p>
-              <span className="font-medium">Discount:</span> {details?.discount}
-              {"%"} off merchant discount
-            </p>
-          </div>
-
-          <div className="mt-6 space-y-3">
-            <button
-              onClick={handlePayment}
-              disabled={!details || Object.keys(details).length === 0}
-              className="w-full bg-sky-400 text-blue-900 font-semibold py-2 rounded-lg hover:bg-sky-300 transition"
-            >
-              {buttonLabel}
-            </button>
-            <button
-              onClick={goBack}
-              className="w-full border border-white/30 text-white py-2 rounded-lg hover:bg-white/10 transition"
-            >
-              Back to Payment Method
-            </button>
-          </div>
-
-          {processing && (
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl">
-              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white mb-4"></div>
-              <p className="text-lg font-semibold mb-1">
-                Processing your payment...
-              </p>
-              <p className="text-sm text-gray-200">
-                Waiting for wallet confirmation
-              </p>
-            </div>
+              }
+            />
           )}
+          <SummaryRow
+            label="Price"
+            value={
+              method === "crypto"
+                ? `${details?.cryptoPrice?.toFixed(3)} ($${(
+                    details.cryptoPrice * details.rate
+                  ).toFixed(2)})`
+                : `$${details?.usdPrice}`
+            }
+          />
+          <SummaryRow
+            label="Fees"
+            value={
+              method === "crypto"
+                ? `${(details.cryptoPrice / 10).toFixed(4)} ($${(
+                    (details.cryptoPrice * details.rate) /
+                    10
+                  ).toFixed(2)})`
+                : `$${(details.usdPrice / 10).toFixed(2)}`
+            }
+          />
+          <SummaryRow
+            label="Rewards"
+            value={`5% cashback = ${
+              rewardsEarned ?? (details?.usdPrice * 0.05).toFixed(0)
+            } tokens`}
+          />
+          <SummaryRow label="Discount" value="10% off merchant discount" />
+        </div>
 
-          {success && (
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center text-center px-4 rounded-xl">
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Payment Successful!
-              </h3>
-              <p className="mb-2 text-base">
-                You paid{" "}
-                {method === "crypto"
-                  ? `${details?.cryptoPrice?.toFixed(4)} ${"ETH"} ($${
-                      details?.cryptoPrice * details?.rate
-                    })`
-                  : `$${details?.usdPrice}`}
-              </p>
-              <h4 className="text-xl font-semibold text-green-300 mb-1">
-                🎉 Congratulations!
-              </h4>
-              <p className="text-sm mb-1">
-                You earned {(details?.usdPrice * 0.05).toFixed(2)} tokens as
-                rewards
-              </p>
-              <p className="text-sm mb-4">Your new balance: 150 tokens</p>
-              <button
-                onClick={() => navigate("/dashboard")}
-                className="bg-white text-blue-900 font-semibold px-6 py-2 rounded-lg hover:bg-blue-100 transition"
-              >
-                OK
-              </button>
-            </div>
-          )}
+        <div className="mt-6 flex flex-col md:flex-row gap-3 justify-between items-center">
+          <button
+            onClick={goBack}
+            className="w-full md:w-auto flex items-center justify-center gap-2 border border-black text-black py-2 px-4 rounded-full hover:bg-black hover:text-white transition"
+          >
+            <ArrowLeft size={16} />
+            Back To Previous Page
+          </button>
+
+          <button
+            onClick={handlePayment}
+            className="w-full md:w-auto flex items-center justify-center gap-2 bg-green-400 hover:bg-green-300 text-white font-semibold py-2 px-6 rounded-full transition"
+          >
+            {buttonLabel}
+            <ArrowRight size={16} />
+          </button>
         </div>
       </div>
-    );
-  }
+
+      {processing && (
+        <Modal>
+          <Loader2 className="animate-spin text-cyan-400 w-10 h-10 mb-4" />
+          <h3 className="text-lg font-semibold mb-1">
+            Processing Your Payment
+          </h3>
+          <p className="text-gray-500 text-sm">
+            Waiting for wallet confirmation
+          </p>
+        </Modal>
+      )}
+
+      {success && rewardsEarned !== null && (
+        <Modal>
+          <ShieldCheck className="w-10 h-10 text-blue-500 mb-2" />
+          <h3 className="text-lg font-semibold mb-1">Payment Successful!</h3>
+          <p className="text-sm mb-4">
+            You paid {details?.cryptoPrice?.toFixed(4)} ETH ($
+            {(details.cryptoPrice * details.rate).toFixed(2)})
+          </p>
+
+          <Gift className="w-10 h-10 text-cyan-400 mb-2" />
+          <h3 className="text-lg font-semibold mb-1">🎉 Congratulations!</h3>
+          <p className="text-sm mb-1">
+            You earned {rewardsEarned} tokens as rewards
+          </p>
+          <p className="text-sm text-green-600 mb-4">
+            Your new balance: 150 tokens
+          </p>
+          <button
+            onClick={() => navigate("/dashboard")}
+            className="w-full border border-black text-black font-semibold py-2 rounded-full hover:bg-black hover:text-white transition"
+          >
+            OK
+          </button>
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+function SummaryRow({ label, value }) {
+  return (
+    <div className="flex justify-between items-center px-4 py-2 rounded border border-gray-100 bg-gray-50">
+      <span className="font-medium">{label}</span>
+      <span className="text-green-500 text-sm">{value}</span>
+    </div>
+  );
+}
+
+function Modal({ children }) {
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center">
+      <div className="bg-white rounded-2xl px-6 py-8 max-w-sm w-full text-center shadow-xl">
+        {children}
+      </div>
+    </div>
+  );
 }

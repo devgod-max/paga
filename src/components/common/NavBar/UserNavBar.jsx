@@ -46,20 +46,20 @@ export default function MerchantNavbar() {
         {/* Logo and Desktop Navigation */}
         <div className="flex items-center gap-6">
           {/* Logo */}
-          <button onClick={() => navigate("/merchant/dashboard")}>
+          <button onClick={() => navigate("/dashboard")}>
             <CircleDot className="w-6 h-6 text-black" />
           </button>
 
           {/* Desktop Nav Buttons */}
           <div className="hidden md:flex gap-4">
             <button
-              onClick={() => navigate("/merchant/dashboard")}
+              onClick={() => navigate("/dashboard")}
               className="text-sm font-medium text-gray-700 hover:text-cyan-500 transition"
             >
               Dashboard
             </button>
             <button
-              onClick={() => navigate("/merchant/checkout")}
+              onClick={() => navigate("/checkout")}
               className="text-sm font-medium text-gray-700 hover:text-cyan-500 transition"
             >
               Checkout
@@ -141,13 +141,13 @@ export default function MerchantNavbar() {
       {menuOpen && (
         <div className="md:hidden mt-2 bg-white border border-gray-200 rounded-lg p-4 shadow text-sm space-y-2">
           <button
-            onClick={() => navigate("/merchant/dashboard")}
+            onClick={() => navigate("/dashboard")}
             className="block w-full text-left py-2 hover:underline"
           >
             Dashboard
           </button>
           <button
-            onClick={() => navigate("/merchant/checkout")}
+            onClick={() => navigate("/checkout")}
             className="block w-full text-left py-2 hover:underline"
           >
             Checkout
