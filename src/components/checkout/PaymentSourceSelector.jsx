@@ -10,6 +10,7 @@ import {
   resetCheckout,
   setPaymentMethod_1,
 } from "../../redux/checkout/checkoutActions";
+import LoadingScreen from "../common/LoadingScreen";
 
 export default function PaymentSelection() {
   const dispatch = useDispatch();
@@ -104,11 +105,7 @@ export default function PaymentSelection() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white text-black">
-        <p className="text-lg animate-pulse">Loading payment methods...</p>
-      </div>
-    );
+    return <LoadingScreen message="Loading your card and bank information" />;
   }
 
   return (
@@ -331,7 +328,7 @@ export default function PaymentSelection() {
           }}
           className="mt-6 w-full py-2 border border-black text-black hover:bg-gray-100 rounded-full"
         >
-          Back to Payment Selection Page
+          Go to the previous page
         </button>
       </div>
     </div>
