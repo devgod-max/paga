@@ -43,11 +43,28 @@ export default function MerchantNavbar() {
   return (
     <header className="w-full bg-white border border-gray-200 rounded-full p-2 px-4 shadow-sm mt-4 max-w-6xl mx-auto">
       <div className="flex items-center justify-between gap-4">
-        {/* Logo */}
-        <div className="flex items-center">
+        {/* Logo and Desktop Navigation */}
+        <div className="flex items-center gap-6">
+          {/* Logo */}
           <button onClick={() => navigate("/merchant/dashboard")}>
             <CircleDot className="w-6 h-6 text-black" />
           </button>
+
+          {/* Desktop Nav Buttons */}
+          <div className="hidden md:flex gap-4">
+            <button
+              onClick={() => navigate("/merchant/dashboard")}
+              className="text-sm font-medium text-gray-700 hover:text-cyan-500 transition"
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => navigate("/merchant/checkout")}
+              className="text-sm font-medium text-gray-700 hover:text-cyan-500 transition"
+            >
+              Checkout
+            </button>
+          </div>
         </div>
 
         {/* Search - Desktop only */}
@@ -62,7 +79,7 @@ export default function MerchantNavbar() {
           </div>
         </div>
 
-        {/* Right: Darkmode, User, Hamburger */}
+        {/* Right Side Controls */}
         <div className="flex items-center gap-4">
           {/* Dark Mode Toggle - hidden on mobile */}
           <div className="bg-gray-200 rounded-full px-1 py-1 hidden md:flex items-center">
@@ -128,6 +145,12 @@ export default function MerchantNavbar() {
             className="block w-full text-left py-2 hover:underline"
           >
             Dashboard
+          </button>
+          <button
+            onClick={() => navigate("/merchant/checkout")}
+            className="block w-full text-left py-2 hover:underline"
+          >
+            Checkout
           </button>
           <button
             onClick={handleLogout}

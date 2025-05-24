@@ -33,7 +33,7 @@ export default function PaymentSelection() {
 
   useEffect(() => {
     if (method_1 === "card" || method_1 === "bank") {
-      setPaymentMethod_1(method_1);
+      setPaymentMethod_2(method_1);
     }
   }, [method_1]);
 
@@ -56,16 +56,11 @@ export default function PaymentSelection() {
 
   const handleContinue = () => {
     if (paymentMethod_2 === "card" && pendingCard) {
-      console.log(pendingCard);
-      sessionStorage.setItem("method_2", pendingCard);
+      sessionStorage.setItem("method_2", JSON.stringify(pendingCard));
       dispatch(selectCard(pendingCard));
-      alert(`Selected Card: ${pendingCard.brand} •••• ${pendingCard.last_4}`);
     } else if (paymentMethod_2 === "bank" && pendingBank) {
-      sessionStorage.setItem("method_2", pendingBank);
+      sessionStorage.setItem("method_2", JSON.stringify(pendingBank));
       dispatch(selectBank(pendingBank));
-      alert(
-        `Selected Bank: ${pendingBank.bank_name} ${pendingBank.account_number}`
-      );
     }
     navigate("/paymentsummary");
   };
@@ -110,17 +105,17 @@ export default function PaymentSelection() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 to-blue-500 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-white text-black">
         <p className="text-lg animate-pulse">Loading payment methods...</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full bg-gradient-to-br from-blue-700 to-blue-500 px-4 py-10 flex flex-col items-center text-white">
+    <div className="w-full min-h-screen bg-white px-4 py-10 flex flex-col items-center text-black">
       <h1 className="text-2xl font-bold mb-2">
         {method_1 === "crypto"
-          ? "what do you prefer?"
+          ? "What do you prefer?"
           : method_1 === "card"
           ? "Choose your card or create new one"
           : "Choose your bank or create new one"}
@@ -130,20 +125,20 @@ export default function PaymentSelection() {
         <div className="flex gap-4 mb-6">
           <button
             onClick={() => setPaymentMethod_2("card")}
-            className={`px-4 py-2 rounded-full ${
+            className={`px-4 py-2 rounded-full border ${
               paymentMethod_2 === "card"
-                ? "bg-cyan-300 text-blue-900"
-                : "bg-white/10 text-white"
+                ? "bg-cyan-400 text-white"
+                : "bg-white border-gray-300 text-black"
             }`}
           >
             Card
           </button>
           <button
             onClick={() => setPaymentMethod_2("bank")}
-            className={`px-4 py-2 rounded-full ${
+            className={`px-4 py-2 rounded-full border ${
               paymentMethod_2 === "bank"
-                ? "bg-cyan-300 text-blue-900"
-                : "bg-white/10 text-white"
+                ? "bg-cyan-400 text-white"
+                : "bg-white border-gray-300 text-black"
             }`}
           >
             Bank
@@ -157,16 +152,16 @@ export default function PaymentSelection() {
             <div
               key={card.card_id}
               onClick={() => setPendingCard(card)}
-              className={`cursor-pointer rounded-lg border px-4 py-3 transition hover:bg-blue-600 ${
+              className={`cursor-pointer rounded-lg border px-4 py-3 transition ${
                 pendingCard?.card_id === card.card_id
-                  ? "bg-blue-600 border-white"
-                  : "bg-white/10 border-white/20"
+                  ? "bg-cyan-100 border-cyan-400"
+                  : "bg-white border-gray-300"
               }`}
             >
               <p className="text-lg font-medium">
                 {card.brand} •••• {card.last_4}
               </p>
-              <p className="text-sm text-blue-200">
+              <p className="text-sm text-gray-500">
                 Expires {card.exp_month}/{card.exp_year} — {card.holder_name}
               </p>
             </div>
@@ -177,16 +172,16 @@ export default function PaymentSelection() {
             <div
               key={bank.bank_id}
               onClick={() => setPendingBank(bank)}
-              className={`cursor-pointer rounded-lg border px-4 py-3 transition hover:bg-blue-600 ${
+              className={`cursor-pointer rounded-lg border px-4 py-3 transition ${
                 pendingBank?.bank_id === bank.bank_id
-                  ? "bg-blue-600 border-white"
-                  : "bg-white/10 border-white/20"
+                  ? "bg-cyan-100 border-cyan-400"
+                  : "bg-white border-gray-300"
               }`}
             >
               <p className="text-lg font-medium">
                 {bank.bank_name} — •••• {bank.account_number}
               </p>
-              <p className="text-sm text-blue-200">
+              <p className="text-sm text-gray-500">
                 Routing: {bank.routing_number} — {bank.holder_name}
               </p>
             </div>
@@ -194,12 +189,15 @@ export default function PaymentSelection() {
 
         <button
           onClick={handleContinue}
-          disabled={paymentMethod_2 === "card" ? !pendingCard : !pendingBank}
-          className={`w-full mt-2 font-semibold py-2 rounded-lg transition ${
+          disabled={
+            (paymentMethod_2 === "card" && !pendingCard) ||
+            (paymentMethod_2 === "bank" && !pendingBank)
+          }
+          className={`w-full mt-2 font-semibold py-2 rounded-full transition ${
             (paymentMethod_2 === "card" && pendingCard) ||
             (paymentMethod_2 === "bank" && pendingBank)
-              ? "bg-cyan-300 text-blue-900 hover:bg-cyan-200"
-              : "bg-white/20 text-white/50 cursor-not-allowed"
+              ? "bg-green-400 text-white hover:bg-green-500"
+              : "bg-gray-200 text-gray-400 cursor-not-allowed"
           }`}
         >
           Continue
@@ -211,7 +209,7 @@ export default function PaymentSelection() {
           </h2>
 
           {paymentMethod_2 === "card" ? (
-            <div className="space-y-2">
+            <>
               <input
                 type="text"
                 placeholder="Name on Card"
@@ -219,7 +217,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewCard({ ...newCard, holder_name: e.target.value })
                 }
-                className="w-full px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                className="input-style"
               />
               <input
                 type="text"
@@ -228,7 +226,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewCard({ ...newCard, number: e.target.value })
                 }
-                className="w-full px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                className="input-style"
               />
               <div className="flex gap-2">
                 <input
@@ -238,7 +236,7 @@ export default function PaymentSelection() {
                   onChange={(e) =>
                     setNewCard({ ...newCard, exp_month: e.target.value })
                   }
-                  className="w-1/2 px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                  className="input-style w-1/2"
                 />
                 <input
                   type="text"
@@ -247,7 +245,7 @@ export default function PaymentSelection() {
                   onChange={(e) =>
                     setNewCard({ ...newCard, exp_year: e.target.value })
                   }
-                  className="w-1/2 px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                  className="input-style w-1/2"
                 />
               </div>
               <input
@@ -257,23 +255,23 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewCard({ ...newCard, brand: e.target.value })
                 }
-                className="w-full px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                className="input-style"
               />
               <button
                 type="button"
                 onClick={handleCardRegister}
                 disabled={registering}
-                className={`w-full font-semibold py-2 rounded-lg transition ${
+                className={`w-full font-semibold py-2 rounded-full transition ${
                   registering
-                    ? "bg-white/20 text-white/50 cursor-not-allowed"
-                    : "bg-cyan-300 text-blue-900 hover:bg-cyan-200"
+                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    : "bg-cyan-400 text-white hover:bg-cyan-500"
                 }`}
               >
                 {registering ? "Registering..." : "Register Card"}
               </button>
-            </div>
+            </>
           ) : (
-            <div className="space-y-2">
+            <>
               <input
                 type="text"
                 placeholder="Account Holder Name"
@@ -281,7 +279,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, holder_name: e.target.value })
                 }
-                className="w-full px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                className="input-style"
               />
               <input
                 type="text"
@@ -290,7 +288,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, account_number: e.target.value })
                 }
-                className="w-full px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                className="input-style"
               />
               <input
                 type="text"
@@ -299,7 +297,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, routing_number: e.target.value })
                 }
-                className="w-full px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                className="input-style"
               />
               <input
                 type="text"
@@ -308,30 +306,30 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, bank_name: e.target.value })
                 }
-                className="w-full px-4 py-2 rounded bg-white/10 placeholder-white/60 focus:outline-none"
+                className="input-style"
               />
               <button
                 type="button"
                 onClick={handleBankRegister}
                 disabled={registering}
-                className={`w-full font-semibold py-2 rounded-lg transition ${
+                className={`w-full font-semibold py-2 rounded-full transition ${
                   registering
-                    ? "bg-white/20 text-white/50 cursor-not-allowed"
-                    : "bg-cyan-300 text-blue-900 hover:bg-cyan-200"
+                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    : "bg-cyan-400 text-white hover:bg-cyan-500"
                 }`}
               >
                 {registering ? "Registering..." : "Register Bank Account"}
               </button>
-            </div>
+            </>
           )}
         </div>
 
         <button
-          onClick={async () => {
+          onClick={() => {
             dispatch(resetCheckout());
             navigate("/checkout");
           }}
-          className="mt-6 w-full py-2 bg-white/20 text-white hover:bg-white/30 rounded-lg"
+          className="mt-6 w-full py-2 border border-black text-black hover:bg-gray-100 rounded-full"
         >
           Back to Payment Selection Page
         </button>
