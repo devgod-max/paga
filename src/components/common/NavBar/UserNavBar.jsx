@@ -68,21 +68,21 @@ export default function MerchantNavbar() {
         </div>
 
         {/* Search - Desktop only */}
-        <div className="flex-1 items-center justify-center hidden md:flex">
+        <div className="ml-auto hidden md:flex items-center justify-end">
           <div className="w-full max-w-md flex items-center bg-white border border-black rounded-full px-4 py-2">
             <input
               type="text"
               placeholder="Search"
               className="flex-1 bg-transparent outline-none text-sm"
             />
-            <Search size={16} className="text-black" />
+            <Search size={10} className="text-black" />
           </div>
         </div>
 
         {/* Right Side Controls */}
         <div className="flex items-center gap-4">
           {/* Dark Mode Toggle - hidden on mobile */}
-          <div className="bg-gray-200 rounded-full px-1 py-1 hidden md:flex items-center">
+          {/* <div className="bg-gray-200 rounded-full px-1 py-1 hidden md:flex items-center">
             <button
               className={`p-1 rounded-full ${
                 !darkMode ? "bg-black text-white" : "text-gray-400"
@@ -99,7 +99,7 @@ export default function MerchantNavbar() {
             >
               <Moon size={18} />
             </button>
-          </div>
+          </div> */}
 
           {/* User Dropdown - desktop only */}
           <div className="relative hidden md:block">
