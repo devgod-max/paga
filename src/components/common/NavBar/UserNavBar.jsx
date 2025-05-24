@@ -1,19 +1,26 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { supabase } from "../../../supabaseClient";
 import store from "../../../redux/store";
 import { logout } from "../../../redux/auth/actions";
-import { Menu, X, UserCircle } from "lucide-react";
-import { resetCheckout } from "../../../redux/checkout/checkoutActions";
+import {
+  Sun,
+  Moon,
+  UserCircle,
+  Search,
+  CircleDot,
+  Menu,
+  X,
+} from "lucide-react";
 
-export default function Navbar() {
+export default function MerchantNavbar() {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null); // Ref to track the dropdown
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const dropdownRef = useRef(null);
   const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     store.dispatch(logout());
@@ -22,118 +29,109 @@ export default function Navbar() {
     window.location.reload();
   };
 
-  const navItems = [
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "Checkout", path: "/checkout" },
-  ];
-
-  // Close the dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false); // Close dropdown when clicked outside
+        setDropdownOpen(false);
+        setMenuOpen(false);
       }
     };
-
-    // Add event listener for clicks outside the dropdown
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup event listener on component unmount
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
-    <header className="bg-black/30 backdrop-blur sticky top-0 z-50 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <header className="w-full bg-white border border-gray-200 rounded-full p-2 px-4 shadow-sm mt-4 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between gap-4">
         {/* Logo */}
-        <h1
-          onClick={() => navigate("/dashboard")}
-          className="text-3xl font-bold tracking-wide cursor-pointer text-cyan-300"
-        >
-          🚀 PAGA
-        </h1>
+        <div className="flex items-center">
+          <button onClick={() => navigate("/merchant/dashboard")}>
+            <CircleDot className="w-6 h-6 text-black" />
+          </button>
+        </div>
 
-        {/* Right Section: Nav Links then User Info */}
-        <div className="hidden md:flex items-center gap-6">
-          {/* Nav Links */}
-          {navItems.map((item) => (
+        {/* Search - Desktop only */}
+        <div className="flex-1 items-center justify-center hidden md:flex">
+          <div className="w-full max-w-md flex items-center bg-white border border-black rounded-full px-4 py-2">
+            <input
+              type="text"
+              placeholder="Search"
+              className="flex-1 bg-transparent outline-none text-sm"
+            />
+            <Search size={16} className="text-black" />
+          </div>
+        </div>
+
+        {/* Right: Darkmode, User, Hamburger */}
+        <div className="flex items-center gap-4">
+          {/* Dark Mode Toggle - hidden on mobile */}
+          <div className="bg-gray-200 rounded-full px-1 py-1 hidden md:flex items-center">
             <button
-              key={item.name}
-              onClick={() => {
-                if (item.name === "Checkout") {
-                  dispatch(resetCheckout());
-                }
-                navigate(item.path);
-              }}
-              className="hover:underline"
+              className={`p-1 rounded-full ${
+                !darkMode ? "bg-black text-white" : "text-gray-400"
+              }`}
+              onClick={() => setDarkMode(false)}
             >
-              {item.name}
+              <Sun size={18} />
             </button>
-          ))}
-          <div className="relative">
-            {/* User Info and Dropdown Toggle */}
-            <div
-              onClick={() => setDropdownOpen(!dropdownOpen)} // Toggle dropdown
-              className="flex items-center gap-2 cursor-pointer pl-4 border-l border-white/30 ml-4"
+            <button
+              className={`p-1 rounded-full ${
+                darkMode ? "bg-black text-white" : "text-gray-400"
+              }`}
+              onClick={() => setDarkMode(true)}
             >
-              <UserCircle size={22} className="text-cyan-300" />
-              <span className="text-sm">{user?.email || "User"}</span>
+              <Moon size={18} />
+            </button>
+          </div>
+
+          {/* User Dropdown - desktop only */}
+          <div className="relative hidden md:block">
+            <div
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-2 cursor-pointer text-sm text-gray-600"
+            >
+              <UserCircle size={22} className="text-cyan-400" />
+              <span className="truncate max-w-[120px]">{user?.email}</span>
             </div>
 
-            {/* Dropdown Menu */}
             {dropdownOpen && (
               <div
-                ref={dropdownRef} // Attach the ref to the dropdown
-                className="absolute right-0 mt-2 w-30 bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 text-white shadow-lg rounded-lg p-2 border border-white/40"
+                ref={dropdownRef}
+                className="absolute right-0 mt-2 w-40 bg-white text-black border border-gray-300 rounded-lg p-2 shadow"
               >
                 <button
-                  onClick={() => handleLogout()}
-                  className="block w-full text-left px-4 py-2 text-white-500 hover:bg-white/10 rounded-b-lg"
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded"
                 >
                   Logout
                 </button>
               </div>
             )}
           </div>
-        </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-2">
-          <div className="pt-2 border-t border-white/20 text-sm text-white/70">
-            Logged in as:{" "}
-            <span className="font-medium text-white">{user?.email}</span>
-          </div>
-          {navItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => {
-                setMenuOpen(false);
-                navigate(item.path);
-              }}
-              className="block w-full text-left text-white hover:underline"
-            >
-              {item.name}
-            </button>
-          ))}
+        <div className="md:hidden mt-2 bg-white border border-gray-200 rounded-lg p-4 shadow text-sm space-y-2">
           <button
-            onClick={() => {
-              setMenuOpen(false);
-              handleLogout();
-            }}
-            className="block w-full text-left text-red-300 hover:underline"
+            onClick={() => navigate("/merchant/dashboard")}
+            className="block w-full text-left py-2 hover:underline"
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={handleLogout}
+            className="block w-full text-left py-2 hover:underline"
           >
             Logout
           </button>
