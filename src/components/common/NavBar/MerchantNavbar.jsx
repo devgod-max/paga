@@ -97,7 +97,7 @@ export default function MerchantNavbar() {
             {dropdownOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-2 w-40 bg-white text-black border border-gray-300 rounded-lg p-2 shadow"
+                className="absolute right-0 mt-2 w-40 bg-white text-black border border-gray-300 rounded-lg p-2 shadow z-50"
               >
                 <button
                   onClick={handleLogout}
