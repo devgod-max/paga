@@ -6,6 +6,7 @@ import AccountInfo from "../../components/dashboard/AccountInfo";
 import MarketData from "../../components/dashboard/MarketData";
 import PurchaseHistory from "../../components/dashboard/PurchaseHistory";
 import RewardHistory from "../../components/dashboard/RewardHistory";
+import LoadingScreen from "../../components/common/LoadingScreen";
 
 export default function Dashboard() {
   const loginUser = JSON.parse(localStorage.getItem("authUser"));
@@ -15,22 +16,34 @@ export default function Dashboard() {
     useSelector((state) => state.dashboard);
 
   useEffect(() => {
-    dispatch(fetchDashboardData(loginUser.email));
+    if (loginUser?.email) {
+      dispatch(fetchDashboardData(loginUser.email));
+    }
   }, [dispatch]);
 
   if (status === "loading")
-    return <p className="text-white text-center">Loading...</p>;
+    return <LoadingScreen message="Loading dashboard..." />;
   if (status === "failed")
-    return <p className="text-red-400 text-center">Error: {error}</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white text-red-500 text-center">
+        <p>Error: {error}</p>
+      </div>
+    );
   if (!user) {
-    return <p className="text-white text-center">Please log in to continue.</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white text-gray-700 text-center">
+        <p>Please log in to continue.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-700 via-indigo-800 to-purple-700 text-white px-4 py-10 md:px-12">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-        Better Life With Crypto
+    <div className="min-h-screen bg-white text-black px-4 py-10 md:px-12">
+      <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
+        Welcome {user.name || "John Doe"}!
       </h1>
+      <p className="text-center text-sm text-gray-500 mb-10">Pay with Crypto</p>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         <AccountInfo user={user} />
         <MarketData cryptos={cryptos} />
