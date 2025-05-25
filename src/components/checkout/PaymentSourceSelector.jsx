@@ -109,7 +109,7 @@ export default function PaymentSelection() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-white px-4 py-10 flex flex-col items-center text-black">
+    <div className="w-full min-h-screen bg-gradient-to-br from-[#0f172a] via-[#121826] to-[#102232] px-4 py-10 flex flex-col items-center text-white">
       <h1 className="text-2xl font-bold mb-2">
         {method_1 === "crypto"
           ? "What do you prefer?"
@@ -122,20 +122,20 @@ export default function PaymentSelection() {
         <div className="flex gap-4 mb-6">
           <button
             onClick={() => setPaymentMethod_2("card")}
-            className={`px-4 py-2 rounded-full border ${
+            className={`px-4 py-2 rounded-full border transition font-semibold ${
               paymentMethod_2 === "card"
                 ? "bg-cyan-400 text-white"
-                : "bg-white border-gray-300 text-black"
+                : "bg-transparent border-white/20 text-white/70 hover:border-white/40"
             }`}
           >
             Card
           </button>
           <button
             onClick={() => setPaymentMethod_2("bank")}
-            className={`px-4 py-2 rounded-full border ${
+            className={`px-4 py-2 rounded-full border transition font-semibold ${
               paymentMethod_2 === "bank"
                 ? "bg-cyan-400 text-white"
-                : "bg-white border-gray-300 text-black"
+                : "bg-transparent border-white/20 text-white/70 hover:border-white/40"
             }`}
           >
             Bank
@@ -149,16 +149,16 @@ export default function PaymentSelection() {
             <div
               key={card.card_id}
               onClick={() => setPendingCard(card)}
-              className={`cursor-pointer rounded-lg border px-4 py-3 transition ${
+              className={`cursor-pointer rounded-xl border px-4 py-3 transition ${
                 pendingCard?.card_id === card.card_id
-                  ? "bg-cyan-100 border-cyan-400"
-                  : "bg-white border-gray-300"
+                  ? "bg-cyan-500/10 border-cyan-400"
+                  : "bg-white/5 border-white/10"
               }`}
             >
-              <p className="text-lg font-medium">
+              <p className="text-lg font-medium text-white">
                 {card.brand} •••• {card.last_4}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-white/60">
                 Expires {card.exp_month}/{card.exp_year} — {card.holder_name}
               </p>
             </div>
@@ -169,16 +169,16 @@ export default function PaymentSelection() {
             <div
               key={bank.bank_id}
               onClick={() => setPendingBank(bank)}
-              className={`cursor-pointer rounded-lg border px-4 py-3 transition ${
+              className={`cursor-pointer rounded-xl border px-4 py-3 transition ${
                 pendingBank?.bank_id === bank.bank_id
-                  ? "bg-cyan-100 border-cyan-400"
-                  : "bg-white border-gray-300"
+                  ? "bg-cyan-500/10 border-cyan-400"
+                  : "bg-white/5 border-white/10"
               }`}
             >
-              <p className="text-lg font-medium">
+              <p className="text-lg font-medium text-white">
                 {bank.bank_name} — •••• {bank.account_number}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-white/60">
                 Routing: {bank.routing_number} — {bank.holder_name}
               </p>
             </div>
@@ -193,8 +193,8 @@ export default function PaymentSelection() {
           className={`w-full mt-2 font-semibold py-2 rounded-full transition ${
             (paymentMethod_2 === "card" && pendingCard) ||
             (paymentMethod_2 === "bank" && pendingBank)
-              ? "bg-green-400 text-white hover:bg-green-500"
-              : "bg-gray-200 text-gray-400 cursor-not-allowed"
+              ? "bg-emerald-400 text-white hover:bg-emerald-500"
+              : "bg-white/10 text-white/40 cursor-not-allowed"
           }`}
         >
           Continue
@@ -206,7 +206,7 @@ export default function PaymentSelection() {
           </h2>
 
           {paymentMethod_2 === "card" ? (
-            <>
+            <div className="space-y-3">
               <input
                 type="text"
                 placeholder="Name on Card"
@@ -214,7 +214,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewCard({ ...newCard, holder_name: e.target.value })
                 }
-                className="input-style"
+                className="w-full rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <input
                 type="text"
@@ -223,7 +223,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewCard({ ...newCard, number: e.target.value })
                 }
-                className="input-style"
+                className="w-full rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <div className="flex gap-2">
                 <input
@@ -233,7 +233,7 @@ export default function PaymentSelection() {
                   onChange={(e) =>
                     setNewCard({ ...newCard, exp_month: e.target.value })
                   }
-                  className="input-style w-1/2"
+                  className="w-1/2 rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 />
                 <input
                   type="text"
@@ -242,7 +242,7 @@ export default function PaymentSelection() {
                   onChange={(e) =>
                     setNewCard({ ...newCard, exp_year: e.target.value })
                   }
-                  className="input-style w-1/2"
+                  className="w-1/2 rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 />
               </div>
               <input
@@ -252,7 +252,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewCard({ ...newCard, brand: e.target.value })
                 }
-                className="input-style"
+                className="w-full rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <button
                 type="button"
@@ -260,15 +260,15 @@ export default function PaymentSelection() {
                 disabled={registering}
                 className={`w-full font-semibold py-2 rounded-full transition ${
                   registering
-                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    ? "bg-white/10 text-white/40 cursor-not-allowed"
                     : "bg-cyan-400 text-white hover:bg-cyan-500"
                 }`}
               >
                 {registering ? "Registering..." : "Register Card"}
               </button>
-            </>
+            </div>
           ) : (
-            <>
+            <div className="space-y-3">
               <input
                 type="text"
                 placeholder="Account Holder Name"
@@ -276,7 +276,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, holder_name: e.target.value })
                 }
-                className="input-style"
+                className="w-full rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <input
                 type="text"
@@ -285,7 +285,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, account_number: e.target.value })
                 }
-                className="input-style"
+                className="w-full rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <input
                 type="text"
@@ -294,7 +294,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, routing_number: e.target.value })
                 }
-                className="input-style"
+                className="w-full rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <input
                 type="text"
@@ -303,7 +303,7 @@ export default function PaymentSelection() {
                 onChange={(e) =>
                   setNewBank({ ...newBank, bank_name: e.target.value })
                 }
-                className="input-style"
+                className="w-full rounded-lg bg-white/5 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               <button
                 type="button"
@@ -311,13 +311,13 @@ export default function PaymentSelection() {
                 disabled={registering}
                 className={`w-full font-semibold py-2 rounded-full transition ${
                   registering
-                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    ? "bg-white/10 text-white/40 cursor-not-allowed"
                     : "bg-cyan-400 text-white hover:bg-cyan-500"
                 }`}
               >
                 {registering ? "Registering..." : "Register Bank Account"}
               </button>
-            </>
+            </div>
           )}
         </div>
 
@@ -326,7 +326,7 @@ export default function PaymentSelection() {
             dispatch(resetCheckout());
             navigate("/checkout");
           }}
-          className="mt-6 w-full py-2 border border-black text-black hover:bg-gray-100 rounded-full"
+          className="mt-6 w-full py-2 border border-white text-white hover:bg-white/10 rounded-full"
         >
           Go to the previous page
         </button>
