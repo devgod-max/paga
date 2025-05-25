@@ -9,7 +9,7 @@ export default function AuthNavbar({ role = "user", children }) {
 
   return (
     <div
-      className="w-full flex flex-col bg-cover bg-center items-center justify-center backdrop-blur-sm text-white"
+      className="w-full min-h-screen overflow-x-hidden flex flex-col bg-cover bg-center text-white"
       style={{ backgroundImage: "url('./assets/bg.png')" }}
     >
       {/* Header */}
@@ -92,8 +92,8 @@ export default function AuthNavbar({ role = "user", children }) {
       </header>
 
       {/* Page content */}
-      <main className="flex-1 w-full flex items-center justify-center px-4 py-0">
-        {children}
+      <main className="flex-1 w-full flex items-center justify-center px-4 py-4">
+        <div className="w-full max-w-5xl">{children}</div>
       </main>
     </div>
   );

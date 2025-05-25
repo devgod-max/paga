@@ -34,7 +34,7 @@ export default function MerchantAuthForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 w-full max-w-md mx-auto text-white px-4 py-10"
+      className="space-y-6 w-full max-w-md mx-auto text-white px-4 py-4"
     >
       <h1 className="text-4xl font-extrabold text-center leading-tight">
         Smarter Payments,

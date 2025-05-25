@@ -8,7 +8,7 @@ export default function Auth() {
   const toggleForm = () => setIsSignIn(!isSignIn);
 
   return (
-    <div className="w-full flex items-center justify-center px-4 py-12">
+    <div className="w-full flex items-center justify-center px-4 py-4">
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 rounded-3xl p-6 md:p-10 bg-[#282d38] bg-opacity-80 backdrop-blur-lg shadow-2xl">
         {/* Feature ComboBoxes – Left on desktop, Bottom on mobile */}
         <div className="order-2 md:order-1 flex flex-col space-y-4 bg-[#1e293b] rounded-2xl p-6 text-white text-lg font-medium">
