@@ -23,10 +23,12 @@ export default function PaymentMethodSelector() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-4 text-black text-center">
+    <div className="w-full max-w-6xl mx-auto px-4 py-4 text-white text-center">
       {/* Welcome message */}
-      <h1 className="text-4xl font-bold mb-2">Welcome {username}!</h1>
-      <p className="text-base text-gray-600 mb-10">
+      <h1 className="text-4xl font-bold mb-2 text-white">
+        Welcome {username}!
+      </h1>
+      <p className="text-base text-white/70 mb-10">
         Choose your preferred payment method to pay.
       </p>
 
@@ -38,7 +40,6 @@ export default function PaymentMethodSelector() {
           label="Pay"
           methodLabel="Bank Transfer"
           onClick={() => handleSelectMethod_1("crypto")}
-          // className="bg-white border border-gray-200 hover:bg-gradient-to-br hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300"
         />
         <PaymentOptionCard
           title="Familiar & trusted"
@@ -46,7 +47,6 @@ export default function PaymentMethodSelector() {
           label="Pay"
           methodLabel="Credit Card"
           onClick={() => handleSelectMethod_1("card")}
-          // className="bg-white border border-gray-200 hover:bg-gradient-to-br hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300"
         />
         <PaymentOptionCard
           title="Low fees"
@@ -54,31 +54,31 @@ export default function PaymentMethodSelector() {
           label="Pay"
           methodLabel="Bank Transfer"
           onClick={() => handleSelectMethod_1("bank")}
-          // className="bg-white border border-gray-200 hover:bg-gradient-to-br hover:from-cyan-500 hover:to-blue-600 hover:text-white transition-all duration-300"
         />
       </div>
 
       {/* How it works */}
-      <h2 className="text-3xl font-bold mb-10">How It Works</h2>
+      <h2 className="text-3xl font-bold mb-10 text-white">How It Works</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-        <div className="border rounded-xl px-4 py-6 text-left bg-white text-gray-700">
-          <p className="mb-2">
-            Sign in with email - No wallet or keys required
-          </p>
-          <span className="font-bold text-gray-400 text-2xl">01</span>
-        </div>
-        <div className="border rounded-xl px-4 py-6 text-left bg-white text-gray-700">
-          <p className="mb-2">Choose how to pay - Crypto, card, or bank</p>
-          <span className="font-bold text-gray-400 text-2xl">02</span>
-        </div>
-        <div className="border rounded-xl px-4 py-6 text-left bg-white text-gray-700">
-          <p className="mb-2">Complete your payment - Instant confirmation</p>
-          <span className="font-bold text-gray-400 text-2xl">03</span>
-        </div>
-        <div className="border rounded-xl px-4 py-6 text-left bg-white text-gray-700">
-          <p className="mb-2">Earn rewards - Get tokens, discounts & more</p>
-          <span className="font-bold text-gray-400 text-2xl">04</span>
-        </div>
+        {[...Array(4)].map((_, i) => {
+          const steps = [
+            "Sign in with email - No wallet or keys required",
+            "Choose how to pay - Crypto, card, or bank",
+            "Complete your payment - Instant confirmation",
+            "Earn rewards - Get tokens, discounts & more",
+          ];
+          return (
+            <div
+              key={i}
+              className="border border-white/10 rounded-2xl px-4 py-6 text-left bg-gradient-to-br from-[#1b1f2c] to-[#141925] text-white/80"
+            >
+              <p className="mb-2">{steps[i]}</p>
+              <span className="font-bold text-cyan-300 text-2xl">{`0${
+                i + 1
+              }`}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
