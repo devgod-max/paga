@@ -55,55 +55,85 @@ export default function MerchantDashboard() {
   ]);
 
   return (
-    <div className="min-h-screen bg-white text-black px-4 py-6 space-y-6 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#121826] to-[#102232] text-white px-4 py-6 space-y-6 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="col-span-2 space-y-6">
           {/* Payout Summary */}
-          <div className="rounded-2xl border border-gray-200 p-6 space-y-4">
-            <h2 className="font-bold text-lg">Payout Summary</h2>
-            <div className="bg-gray-100 rounded-full px-4 py-2 flex justify-between">
-              <span>Total Settled This Month</span>
-              <span className="text-emerald-500 font-semibold">$10,000</span>
+          <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 space-y-6 shadow-inner">
+            <h2 className="font-bold text-2xl text-white">Payout Summary</h2>
+            <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
+              <span className="text-white text-base font-medium">
+                Total Settled This Month
+              </span>
+              <span className="text-[#00ffd1] font-semibold text-base">
+                $10,000
+              </span>
             </div>
-            <div className="bg-gray-100 rounded-full px-4 py-2 flex justify-between">
-              <span>Pending Payout</span>
-              <span className="text-emerald-500 font-semibold">$2,000</span>
+            <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
+              <span className="text-white text-base font-medium">
+                Pending Payout
+              </span>
+              <span className="text-[#00ffd1] font-semibold text-base">
+                $2,000
+              </span>
             </div>
-            <div className="bg-gray-100 rounded-full px-4 py-2 flex justify-between">
-              <span>Total Settled This Month</span>
-              <span className="text-emerald-500 font-semibold">
+            <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
+              <span className="text-white text-base font-medium">
+                Total Settled This Month
+              </span>
+              <span className="text-[#00ffd1] font-semibold text-base">
                 May 10, 2025
               </span>
             </div>
-            <div>
-              <p className="text-sm mb-1">Monthly Target</p>
-              <div className="h-2 bg-gray-200 rounded-full w-full">
-                <div className="h-full bg-emerald-600 w-4/5 rounded-full" />
+            <div className="mt-2">
+              <p className="text-sm font-semibold mb-2">Monthly Target</p>
+              <div className="relative w-full h-3 bg-[#404452] rounded-full">
+                <div
+                  className="absolute top-0 left-0 h-full bg-[#00ffd1] rounded-full"
+                  style={{ width: "28%" }}
+                />
+                <div className="absolute left-[28%] -top-6 text-xs bg-[#0f172a] border border-[#00ffd1] text-white px-2 py-0.5 rounded-full shadow-sm">
+                  28%
+                </div>
               </div>
             </div>
           </div>
 
           {/* Rewards & Insights */}
-          <div className="rounded-2xl border border-gray-200 p-6 space-y-4">
-            <h2 className="font-bold text-lg">Rewards & Insights</h2>
-            <div className="bg-gray-100 rounded-full px-4 py-2 flex justify-between">
-              <span>Total Rewards Given</span>
-              <span className="text-emerald-500 font-semibold">500 Tokens</span>
+          <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 space-y-6 shadow-inner">
+            <h2 className="font-bold text-2xl text-white">
+              Rewards & Insights
+            </h2>
+            <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
+              <span className="text-white text-base font-medium">
+                Total Rewards Given
+              </span>
+              <span className="text-[#00ffd1] font-semibold text-base">
+                500 Tokens
+              </span>
             </div>
-            <div className="bg-gray-100 rounded-full px-4 py-2 flex justify-between">
-              <span>Most Popular Payment</span>
-              <span className="text-emerald-500 font-semibold">Crypto</span>
+            <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
+              <span className="text-white text-base font-medium">
+                Most Popular Payment
+              </span>
+              <span className="text-[#00ffd1] font-semibold text-base">
+                Crypto
+              </span>
             </div>
-            <div className="bg-gray-100 rounded-full px-4 py-2 flex justify-between">
-              <span>Transactions</span>
-              <span className="text-emerald-500 font-semibold">120</span>
+            <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
+              <span className="text-white text-base font-medium">
+                Transactions
+              </span>
+              <span className="text-[#00ffd1] font-semibold text-base">
+                120
+              </span>
             </div>
           </div>
         </div>
 
         {/* Total Sales */}
-        <div className="rounded-2xl border border-gray-200 p-6 space-y-4">
-          <h2 className="font-bold text-lg">Total Sales</h2>
+        <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 space-y-6 shadow-inner">
+          <h2 className="font-bold text-2xl text-white">Total Sales</h2>
           <div className="flex flex-col gap-6 items-center">
             <div className="w-full h-96">
               <ResponsiveContainer width="100%" height="100%">
@@ -131,12 +161,10 @@ export default function MerchantDashboard() {
               {sales.map((s, i) => (
                 <div
                   key={i}
-                  className="border border-gray-200 rounded-full px-3 py-1 flex items-center gap-2 justify-between"
+                  className="border border-white/10 bg-[#2a2e3a] rounded-full px-3 py-1 flex items-center gap-2 justify-between"
                 >
-                  <span className="font-medium">{s.name}</span>
-                  <span className="text-emerald-500">
-                    ${s.value.toFixed(0)}
-                  </span>
+                  <span className="font-medium text-white">{s.name}</span>
+                  <span className="text-[#00ffd1]">${s.value.toFixed(0)}</span>
                 </div>
               ))}
             </div>
@@ -145,33 +173,48 @@ export default function MerchantDashboard() {
       </div>
 
       {/* Transactions Full Width */}
-      <div className="rounded-2xl border border-gray-200 p-6 overflow-auto">
-        <h2 className="font-bold text-lg mb-2">Transaction</h2>
+      <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 overflow-auto shadow-inner">
+        <h2 className="font-bold text-2xl text-white mb-4">Transaction</h2>
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gradient-to-r from-cyan-400 to-blue-400 text-white">
-              <th className="text-left py-2 px-3 rounded-l-full">Date</th>
-              <th className="text-left py-2 px-3">Customer</th>
-              <th className="text-left py-2 px-3">Amount</th>
-              <th className="text-left py-2 px-3">Method</th>
-              <th className="text-left py-2 px-3 rounded-r-full">Status</th>
+            <tr className="bg-gradient-to-r from-cyan-400 to-sky-500 text-white">
+              <th className="text-left py-3 px-4 rounded-l-full font-semibold">
+                Date
+              </th>
+              <th className="text-left py-3 px-4 font-semibold">Customer</th>
+              <th className="text-left py-3 px-4 font-semibold">Amount</th>
+              <th className="text-left py-3 px-4 font-semibold">Method</th>
+              <th className="text-left py-3 px-4 rounded-r-full font-semibold">
+                Status
+              </th>
             </tr>
           </thead>
-          <tbody className="text-black">
-            {transactions.map((t, i) => (
-              <tr key={i} className="border-t">
-                <td className="py-2 px-3">{t.date}</td>
-                <td className="py-2 px-3">{t.customer}</td>
-                <td className="py-2 px-3">{t.amount}</td>
-                <td className="py-2 px-3">{t.method}</td>
-                <td className="py-2 px-3 text-emerald-500 font-medium flex items-center gap-1">
-                  {t.status}
-                  {t.status.toLowerCase().includes("confirm") && (
-                    <FaCheckCircle className="text-emerald-500" />
-                  )}
-                </td>
-              </tr>
-            ))}
+          <tbody className="text-white/90 divide-y divide-[#2a2e3a]">
+            {transactions.map((t, i) => {
+              const isConfirmed = t.status.toLowerCase().includes("confirm");
+              const isRefund = t.status.toLowerCase().includes("refund");
+              const statusColor = isConfirmed
+                ? "text-[#00ffd1]"
+                : isRefund
+                ? "text-[#38bdf8]"
+                : "text-white";
+              return (
+                <tr key={i} className="rounded-xl">
+                  <td className="py-4 px-4 rounded-l-xl">{t.date}</td>
+                  <td className="py-4 px-4">{t.customer}</td>
+                  <td className="py-4 px-4">{t.amount}</td>
+                  <td className="py-4 px-4">{t.method}</td>
+                  <td
+                    className={`py-4 px-4 rounded-r-xl font-semibold flex items-center gap-1 ${statusColor}`}
+                  >
+                    {t.status}
+                    {isConfirmed && (
+                      <FaCheckCircle className="text-[#00ffd1]" />
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -40,54 +40,34 @@ export default function MerchantNavbar() {
   }, []);
 
   return (
-    <header className="w-full bg-white border border-gray-200 rounded-full p-2 px-4 shadow-sm mt-4 max-w-6xl mx-auto">
+    <header className="w-full bg-gradient-to-r from-[#1b1f2c] to-[#0f2936] border border-white/10 rounded-full p-2 px-4 shadow-inner mt-4 max-w-6xl mx-auto">
       <div className="flex items-center justify-between gap-4">
         {/* Logo */}
         <div className="flex items-center">
           <button onClick={() => navigate("/merchant/dashboard")}>
-            <CircleDot className="w-6 h-6 text-black" />
+            <CircleDot className="w-6 h-6 text-white" />
           </button>
         </div>
 
         {/* Search - Desktop only */}
         <div className="ml-auto hidden md:flex items-center justify-end">
-          <div className="w-full max-w-md flex items-center bg-white border border-black rounded-full px-4 py-2">
+          <div className="w-full max-w-md flex items-center bg-transparent border border-white/20 rounded-full px-4 py-2">
             <input
               type="text"
               placeholder="Search"
-              className="flex-1 bg-transparent outline-none text-sm"
+              className="flex-1 bg-transparent outline-none text-sm text-white placeholder-white/60"
             />
-            <Search size={10} className="text-black" />
+            <Search size={16} className="text-white" />
           </div>
         </div>
 
         {/* Right: Darkmode, User, Hamburger */}
         <div className="flex items-center gap-4">
-          {/* Dark Mode Toggle - hidden on mobile */}
-          {/* <div className="bg-gray-200 rounded-full px-1 py-1 hidden md:flex items-center">
-            <button
-              className={`p-1 rounded-full ${
-                !darkMode ? "bg-black text-white" : "text-gray-400"
-              }`}
-              onClick={() => setDarkMode(false)}
-            >
-              <Sun size={18} />
-            </button>
-            <button
-              className={`p-1 rounded-full ${
-                darkMode ? "bg-black text-white" : "text-gray-400"
-              }`}
-              onClick={() => setDarkMode(true)}
-            >
-              <Moon size={18} />
-            </button>
-          </div> */}
-
           {/* User Dropdown - desktop only */}
           <div className="relative hidden md:block">
             <div
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-2 cursor-pointer text-sm text-gray-600"
+              className="flex items-center gap-2 cursor-pointer text-sm text-white"
             >
               <UserCircle size={22} className="text-cyan-400" />
               <span className="truncate max-w-[120px]">{user?.email}</span>
@@ -96,11 +76,11 @@ export default function MerchantNavbar() {
             {dropdownOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-2 w-40 bg-white text-black border border-gray-300 rounded-lg p-2 shadow z-50"
+                className="absolute right-0 mt-2 w-40 bg-[#1c1f26] text-white border border-white/10 rounded-lg p-2 shadow z-50"
               >
                 <button
                   onClick={handleLogout}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded"
+                  className="block w-full text-left px-4 py-2 hover:bg-white/10 rounded"
                 >
                   Logout
                 </button>
@@ -110,7 +90,7 @@ export default function MerchantNavbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden text-white"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Menu"
           >
@@ -121,7 +101,7 @@ export default function MerchantNavbar() {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 bg-white border border-gray-200 rounded-lg p-4 shadow text-sm space-y-2">
+        <div className="md:hidden mt-2 bg-[#1c1f26] border border-white/10 rounded-lg p-4 shadow text-sm space-y-2 text-white">
           <button
             onClick={() => navigate("/merchant/dashboard")}
             className="block w-full text-left py-2 hover:underline"
