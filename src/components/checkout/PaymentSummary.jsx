@@ -101,7 +101,7 @@ export default function PaymentSummary() {
   const goBack = () => navigate("/paymentsource");
 
   return (
-    <div className="w-full text-white px-4 py-8 flex flex-col items-center min-h-screen">
+    <div className="h-full text-white px-4 py-12 flex flex-col items-center">
       <h1 className="text-3xl font-bold text-center mb-1">
         Welcome {username}!
       </h1>

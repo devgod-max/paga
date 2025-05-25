@@ -23,7 +23,7 @@ export default function PaymentMethodSelector() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-4 text-white text-center">
+    <div className="h-full max-w-6xl mx-auto px-4 py-12 text-white text-center">
       {/* Welcome message */}
       <h1 className="text-4xl font-bold mb-2 text-white">
         Welcome {username}!
