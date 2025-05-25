@@ -25,13 +25,13 @@ export default function Dashboard() {
     return <LoadingScreen message="Loading dashboard..." />;
   if (status === "failed")
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white text-red-500 text-center">
+      <div className="min-h-screen flex items-center justify-center text-red-500 text-center">
         <p>Error: {error}</p>
       </div>
     );
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white text-gray-700 text-center">
+      <div className="min-h-screen flex items-center justify-center text-gray-700 text-center">
         <p>Please log in to continue.</p>
       </div>
     );
