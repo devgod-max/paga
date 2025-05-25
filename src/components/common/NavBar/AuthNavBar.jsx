@@ -8,9 +8,12 @@ export default function AuthNavbar({ role = "user", children }) {
   const isUser = role === "user";
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black">
+    <div
+      className="w-full flex flex-col bg-cover bg-center items-center justify-center backdrop-blur-sm text-white"
+      style={{ backgroundImage: "url('./assets/bg.png')" }}
+    >
       {/* Header */}
-      <header className="w-full shadow-sm border-b border-gray-200 sticky top-0 z-50 bg-white">
+      <header className="w-full shadow-sm border-b border-white/10 sticky top-0 z-50 bg-black/60 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <h1
             onClick={() => navigate("/")}
@@ -26,7 +29,7 @@ export default function AuthNavbar({ role = "user", children }) {
                 <span>Are you a merchant?</span>
                 <button
                   onClick={() => navigate("/merchant")}
-                  className="text-blue-600 hover:underline"
+                  className="text-cyan-300 hover:underline"
                 >
                   Login here
                 </button>
@@ -36,7 +39,7 @@ export default function AuthNavbar({ role = "user", children }) {
                 <span>Are you a customer?</span>
                 <button
                   onClick={() => navigate("/")}
-                  className="text-blue-600 hover:underline"
+                  className="text-cyan-300 hover:underline"
                 >
                   Login here
                 </button>
@@ -46,7 +49,7 @@ export default function AuthNavbar({ role = "user", children }) {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-gray-600"
+            className="md:hidden text-white/70"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Menu"
           >
@@ -56,7 +59,7 @@ export default function AuthNavbar({ role = "user", children }) {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden px-4 py-2 text-sm border-t border-gray-200 bg-white">
+          <div className="md:hidden px-4 py-2 text-sm border-t border-white/10 bg-black/60">
             {isUser ? (
               <p>
                 Are you a merchant?{" "}
@@ -65,7 +68,7 @@ export default function AuthNavbar({ role = "user", children }) {
                     setMenuOpen(false);
                     navigate("/merchant");
                   }}
-                  className="text-blue-600 hover:underline font-medium"
+                  className="text-cyan-300 hover:underline font-medium"
                 >
                   Login here
                 </button>
@@ -78,7 +81,7 @@ export default function AuthNavbar({ role = "user", children }) {
                     setMenuOpen(false);
                     navigate("/");
                   }}
-                  className="text-blue-600 hover:underline font-medium"
+                  className="text-cyan-300 hover:underline font-medium"
                 >
                   Login here
                 </button>
@@ -89,7 +92,7 @@ export default function AuthNavbar({ role = "user", children }) {
       </header>
 
       {/* Page content */}
-      <main className="flex-1 w-full flex items-center justify-center">
+      <main className="flex-1 w-full flex items-center justify-center px-4 py-0">
         {children}
       </main>
     </div>
