@@ -109,7 +109,7 @@ export default function PaymentSelection() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-[#0f172a] via-[#121826] to-[#102232] px-4 py-10 flex flex-col items-center text-white">
+    <div className="w-full min-h-screen px-4 py-10 flex flex-col items-center text-white">
       <h1 className="text-2xl font-bold mb-2">
         {method_1 === "crypto"
           ? "What do you prefer?"

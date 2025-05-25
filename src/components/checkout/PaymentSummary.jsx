@@ -101,13 +101,13 @@ export default function PaymentSummary() {
   const goBack = () => navigate("/paymentsource");
 
   return (
-    <div className="w-full bg-white text-black px-4 py-8 flex flex-col items-center">
+    <div className="w-full text-white px-4 py-8 flex flex-col items-center min-h-screen">
       <h1 className="text-3xl font-bold text-center mb-1">
         Welcome {username}!
       </h1>
-      <p className="text-gray-500 text-sm mb-8">Pay with {method}</p>
+      <p className="text-white/60 text-sm mb-8">Pay with {method}</p>
 
-      <div className="w-full max-w-2xl border border-gray-200 rounded-2xl p-6 md:p-8">
+      <div className="w-full max-w-2xl bg-[#1b1f2c] border border-white/10 rounded-2xl p-6 md:p-8">
         <h2 className="text-xl font-semibold mb-4">Summary</h2>
 
         <div className="space-y-3 text-sm">
@@ -117,7 +117,7 @@ export default function PaymentSummary() {
             <SummaryRow
               label="Crypto Type"
               value={
-                <select className="border border-gray-200 rounded px-2 py-1 bg-white text-sm">
+                <select className="border border-white/20 rounded px-2 py-1 bg-transparent text-white/80 text-sm">
                   <option value="ETH">ETH</option>
                 </select>
               }
@@ -156,7 +156,7 @@ export default function PaymentSummary() {
         <div className="mt-6 flex flex-col md:flex-row gap-3 justify-between items-center">
           <button
             onClick={goBack}
-            className="w-full md:w-auto flex items-center justify-center gap-2 border border-black text-black py-2 px-4 rounded-full hover:bg-black hover:text-white transition"
+            className="w-full md:w-auto flex items-center justify-center gap-2 border border-white text-white py-2 px-4 rounded-full hover:bg-white/10 transition"
           >
             <ArrowLeft size={16} />
             Back To Previous Page
@@ -164,7 +164,7 @@ export default function PaymentSummary() {
 
           <button
             onClick={handlePayment}
-            className="w-full md:w-auto flex items-center justify-center gap-2 bg-green-400 hover:bg-green-300 text-white font-semibold py-2 px-6 rounded-full transition"
+            className="w-full md:w-auto flex items-center justify-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-white font-semibold py-2 px-6 rounded-full transition"
           >
             {buttonLabel}
             <ArrowRight size={16} />
@@ -178,7 +178,7 @@ export default function PaymentSummary() {
           <h3 className="text-lg font-semibold mb-1">
             Processing Your Payment
           </h3>
-          <p className="text-gray-500 text-sm">
+          <p className="text-white/60 text-sm">
             Waiting for wallet confirmation
           </p>
         </Modal>
@@ -186,7 +186,7 @@ export default function PaymentSummary() {
 
       {success && rewardsEarned !== null && (
         <Modal>
-          <ShieldCheck className="w-10 h-10 text-blue-500 mb-2" />
+          <ShieldCheck className="w-10 h-10 text-green-400 mb-2" />
           <h3 className="text-lg font-semibold mb-1">Payment Successful!</h3>
           <p className="text-sm mb-4">
             You paid {details?.cryptoPrice?.toFixed(4)} ETH ($
@@ -198,12 +198,12 @@ export default function PaymentSummary() {
           <p className="text-sm mb-1">
             You earned {rewardsEarned} tokens as rewards
           </p>
-          <p className="text-sm text-green-600 mb-4">
+          <p className="text-sm text-emerald-400 mb-4">
             Your new balance: 150 tokens
           </p>
           <button
             onClick={() => navigate("/dashboard")}
-            className="w-full border border-black text-black font-semibold py-2 rounded-full hover:bg-black hover:text-white transition"
+            className="w-full border border-white text-white font-semibold py-2 rounded-full hover:bg-white/10 transition"
           >
             OK
           </button>
@@ -215,9 +215,9 @@ export default function PaymentSummary() {
 
 function SummaryRow({ label, value }) {
   return (
-    <div className="flex justify-between items-center px-4 py-2 rounded border border-gray-100 bg-gray-50">
-      <span className="font-medium">{label}</span>
-      <span className="text-green-500 text-sm">{value}</span>
+    <div className="flex justify-between items-center px-4 py-2 rounded border border-white/10 bg-white/5">
+      <span className="font-medium text-white/90">{label}</span>
+      <span className="text-emerald-400 text-sm">{value}</span>
     </div>
   );
 }
@@ -225,7 +225,7 @@ function SummaryRow({ label, value }) {
 function Modal({ children }) {
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center">
-      <div className="bg-white rounded-2xl px-6 py-8 max-w-sm w-full text-center shadow-xl">
+      <div className="bg-[#1b1f2c] text-white rounded-2xl px-6 py-8 max-w-sm w-full text-center shadow-xl">
         {children}
       </div>
     </div>
