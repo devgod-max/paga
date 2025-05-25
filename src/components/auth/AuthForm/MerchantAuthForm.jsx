@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, signup } from "../../../redux/auth/actions";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
@@ -11,23 +11,38 @@ export default function MerchantAuthForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { status } = useSelector((state) => state.auth);
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (status === "error") {
+      setError("Incorrect email or password.");
+    } else {
+      setError("");
+    }
+  }, [status, isSignIn]);
 
   const toggleForm = () => setIsSignIn(!isSignIn);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSignIn) {
-      await dispatch(login(email, password, "merchant", navigate));
-      navigate("/merchant/dashboard");
-    } else {
-      if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return;
+    try {
+      if (isSignIn) {
+        await dispatch(login(email, password, "merchant", navigate));
+        navigate("/merchant/dashboard");
+      } else {
+        if (password !== confirmPassword) {
+          setError("Passwords do not match.");
+          return;
+        }
+        await dispatch(signup(email, username, "merchant", password, navigate));
+        navigate("/merchant/dashboard");
       }
-      await dispatch(signup(email, username, "merchant", password, navigate));
-      navigate("/merchant/dashboard");
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
     }
   };
 
@@ -110,6 +125,11 @@ export default function MerchantAuthForm() {
           placeholder="Confirm Password"
           className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
         />
+      )}
+
+      {/* Error Message Display */}
+      {error && (
+        <div className="text-sm text-red-400 text-center -mt-2">{error}</div>
       )}
 
       <button

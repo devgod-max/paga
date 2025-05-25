@@ -26,7 +26,6 @@ export const loginUser = async (email, password, role) => {
 
     // Check if the user's email is confirmed
     if (user && user.email_confirmed_at) {
-      console.log("User logged in successfully:", user);
       return user;
     } else {
       console.log("Email not confirmed. Please verify your email.");
@@ -36,8 +35,6 @@ export const loginUser = async (email, password, role) => {
       return null;
     }
   } catch (error) {
-    console.error("Login error:", error.message);
-    alert("Error during login. Please try again.");
     throw error;
   }
 };

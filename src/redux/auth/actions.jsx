@@ -16,7 +16,6 @@ export const login = (email, password, role) => async (dispatch) => {
       dispatch(setStatus("success"));
     }
   } catch (error) {
-    console.error("Login failed:", error);
     dispatch(setStatus("error"));
   }
 };
@@ -36,7 +35,6 @@ export const signup = (email, username, role, password) => async (dispatch) => {
       dispatch(setStatus("success"));
     }
   } catch (error) {
-    console.error("Signup failed:", error);
     dispatch(setStatus("error"));
   }
 };

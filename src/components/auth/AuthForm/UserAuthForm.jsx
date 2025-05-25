@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../../../redux/auth/actions";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 
@@ -10,26 +10,43 @@ export default function AuthForm({ isSignIn, toggleForm }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { status } = useSelector((state) => state.auth);
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (status === "error") {
+      setError("Incorrect email or password.");
+    } else {
+      setError("");
+    }
+  }, [status, isSignIn]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSignIn) {
-      await dispatch(login(email, password, "user"));
-      navigate("/checkout");
-    } else {
-      if (password === confirmPassword) {
-        await dispatch(signup(email, username, "user", password));
+
+    try {
+      if (isSignIn) {
+        await dispatch(login(email, password, "user"));
         navigate("/checkout");
       } else {
-        alert("Passwords do not match.");
+        if (password !== confirmPassword) {
+          setError("Passwords do not match.");
+          return;
+        }
+        await dispatch(signup(email, username, "user", password));
+        navigate("/checkout");
       }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+      {/* Google button */}
       <button
         type="button"
         className="w-full border border-white/30 rounded-full py-3 flex items-center justify-center gap-2 text-sm font-medium hover:bg-white/10 transition text-white"
@@ -52,6 +69,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         {isSignIn ? "Sign in to your account" : "Create your account"}
       </h2>
 
+      {/* Email input */}
       <div className="relative">
         <Mail className="absolute left-4 top-3 text-white/50" size={18} />
         <input
@@ -73,6 +91,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         />
       )}
 
+      {/* Password input */}
       <div className="relative">
         <Lock className="absolute left-4 top-3 text-white/50" size={18} />
         <input
@@ -91,6 +110,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         </button>
       </div>
 
+      {/* Confirm Password */}
       {!isSignIn && (
         <input
           type="password"
@@ -99,6 +119,11 @@ export default function AuthForm({ isSignIn, toggleForm }) {
           placeholder="Confirm Password"
           className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
         />
+      )}
+
+      {/* Error Message Display */}
+      {error && (
+        <div className="text-sm text-red-400 text-center -mt-2">{error}</div>
       )}
 
       <button
