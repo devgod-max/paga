@@ -5,23 +5,23 @@ export default function AccountInfo({ user }) {
   ];
 
   return (
-    <section className="w-full max-w-2xl mx-auto">
+    <section className="w-full max-w-2xl mx-auto text-white">
       <h2 className="text-xl font-semibold mb-4">Account</h2>
 
       <div className="space-y-3">
         {info.map((item, index) => (
           <div
             key={index}
-            className="flex justify-between items-center px-4 py-3 border border-gray-200 rounded-xl bg-white"
+            className="flex justify-between items-center px-4 py-3 border border-white/10 rounded-xl bg-white/5"
           >
-            <span className="text-sm font-semibold text-black">
+            <span className="text-sm font-semibold text-white/90">
               {item.label}
             </span>
             <div className="text-right">
-              <div className="text-sm text-emerald-500 font-medium">
+              <div className="text-sm text-emerald-400 font-medium">
                 {item.value}
               </div>
-              <div className="text-xs text-gray-400">{item.status}</div>
+              <div className="text-xs text-white/50">{item.status}</div>
             </div>
           </div>
         ))}

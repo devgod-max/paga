@@ -1,23 +1,33 @@
 import React from "react";
 
-const Table = ({ columns, data }) => {
+const Table = ({
+  columns,
+  data = [],
+  hideHeader = false,
+  rowClassName = "",
+}) => {
   return (
     <div className="overflow-auto">
-      <table className="w-full table-auto border border-white/30 text-sm">
-        <thead className="bg-white/10">
-          <tr>
-            {columns.map((col, index) => (
-              <th key={index} className="p-2 text-left">
-                {col}
-              </th>
-            ))}
-          </tr>
-        </thead>
+      <table className="w-full table-auto text-sm">
+        {!hideHeader && (
+          <thead className="bg-white/10 text-white">
+            <tr>
+              {columns.map((col, index) => (
+                <th key={index} className="p-3 text-left whitespace-nowrap">
+                  {col}
+                </th>
+              ))}
+            </tr>
+          </thead>
+        )}
         <tbody>
           {data.map((row, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              className={`border-b border-white/10 last:border-0 ${rowClassName}`}
+            >
               {Object.values(row).map((value, i) => (
-                <td key={i} className="p-2">
+                <td key={i} className="p-3 whitespace-nowrap">
                   {value}
                 </td>
               ))}

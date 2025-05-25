@@ -38,7 +38,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-black px-4 py-10 md:px-12">
+    <div className="w-full text-white px-4 py-10 md:px-12">
       <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
         Welcome {user.name || "John Doe"}!
       </h1>
