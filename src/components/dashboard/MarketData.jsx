@@ -14,7 +14,9 @@ export default function MarketData(cryptos) {
     name: <span className="text-white/50 text-sm">{crypto.name}</span>,
     rate: (
       <div className="text-right">
-        <p className="text-emerald-400 font-semibold">{crypto.price}</p>
+        <p className="text-emerald-400 font-semibold float-left">
+          {crypto.price}
+        </p>
         <p
           className={`text-xs ${
             parseFloat(crypto.change) < 0 ? "text-red-400" : "text-green-400"

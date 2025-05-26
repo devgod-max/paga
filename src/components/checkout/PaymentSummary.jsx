@@ -187,7 +187,10 @@ export default function PaymentSummary() {
       {success && rewardsEarned !== null && (
         <Modal>
           <ShieldCheck className="w-10 h-10 text-green-400 mb-2" />
-          <h3 className="text-lg font-semibold mb-1">Payment Successful!</h3>
+          <h2 className="text-lg font-bold mb-1">Payment Successful!</h2>
+          <h3 className="text-lg font-semibold mb-1">
+            Boom. You just got paid to pay.
+          </h3>
           <p className="text-sm mb-4">
             You paid {details?.cryptoPrice?.toFixed(4)} ETH ($
             {(details.cryptoPrice * details.rate).toFixed(2)})
@@ -196,7 +199,8 @@ export default function PaymentSummary() {
           <Gift className="w-10 h-10 text-cyan-400 mb-2" />
           <h3 className="text-lg font-semibold mb-1">🎉 Congratulations!</h3>
           <p className="text-sm mb-1">
-            You earned {rewardsEarned} tokens as rewards
+            Nice move. That’s another {rewardsEarned} PAY in your stack. Keep
+            stacking. Spend smart. Get rewarded.
           </p>
           <p className="text-sm text-emerald-400 mb-4">
             Your new balance: 150 tokens

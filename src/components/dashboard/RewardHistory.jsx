@@ -34,7 +34,8 @@ export default function RewardHistory({ data = [] }) {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Reward History</h2>
         <p className="text-sm font-semibold text-cyan-400">
-          Total <span className="text-emerald-400">{totalTokens}</span> Tokens
+          PAY earned so far{" "}
+          <span className="text-emerald-400">{totalTokens}</span> Tokens
         </p>
       </div>
 

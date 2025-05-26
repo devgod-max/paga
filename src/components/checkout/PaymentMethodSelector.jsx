@@ -29,7 +29,8 @@ export default function PaymentMethodSelector() {
         Welcome {username}!
       </h1>
       <p className="text-base text-white/70 mb-10">
-        Choose your preferred payment method to pay.
+        Pay your way. Earn along the way. Skip the friction. Pay with email or
+        wallet. 5 PAY tokens with this payment — let’s go.
       </p>
 
       {/* Payment options */}

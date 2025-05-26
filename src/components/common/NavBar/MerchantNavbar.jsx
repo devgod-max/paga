@@ -70,7 +70,9 @@ export default function MerchantNavbar() {
               className="flex items-center gap-2 cursor-pointer text-sm text-white"
             >
               <UserCircle size={22} className="text-cyan-400" />
-              <span className="truncate max-w-[120px]">{user?.email}</span>
+              <span className="truncate max-w-[120px]">
+                {user?.user_metadata.name}
+              </span>
             </div>
 
             {dropdownOpen && (

@@ -55,7 +55,7 @@ export default function MerchantDashboard() {
   ]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#121826] to-[#102232] text-white px-4 py-6 space-y-6 max-w-7xl mx-auto">
+    <div className="h-full text-white px-4 py-6 space-y-6 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="col-span-2 space-y-6">
           {/* Payout Summary */}
