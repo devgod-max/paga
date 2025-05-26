@@ -11,7 +11,7 @@ import MainLayout from "../layouts/MainLayout";
 import AuthNavbar from "../components/common/NavBar/AuthNavBar";
 import PaymentSourceSelector from "../components/checkout/PaymentSourceSelector";
 import { PublicRoute, UserRoute, MerchantRoute } from "./ProtectedRoute";
-import LoadingScreen from "../components/common/LoadingScreen";
+import LoadingScreen from "../components/common/LoadingScreenAuth";
 
 export default function AppRouter() {
   const [currentUser, setCurrentUser] = useState(null);
