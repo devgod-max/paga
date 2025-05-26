@@ -36,21 +36,21 @@ export default function PaymentMethodSelector() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         <PaymentOptionCard
           title="Fast & secure"
-          icon="🪙"
+          iconSrc="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum-icon-purple.svg"
           label="Pay"
-          methodLabel="Bank Transfer"
+          methodLabel="Crypto Currency"
           onClick={() => handleSelectMethod_1("crypto")}
         />
         <PaymentOptionCard
           title="Familiar & trusted"
-          icon="💳"
+          iconSrc="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
           label="Pay"
           methodLabel="Credit Card"
           onClick={() => handleSelectMethod_1("card")}
         />
         <PaymentOptionCard
           title="Low fees"
-          icon="🏦"
+          iconSrc="https://img.icons8.com/color/48/bank.png"
           label="Pay"
           methodLabel="Bank Transfer"
           onClick={() => handleSelectMethod_1("bank")}
