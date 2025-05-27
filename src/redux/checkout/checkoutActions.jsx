@@ -58,7 +58,7 @@ export const fetchCheckoutData = (method) => async (dispatch) => {
         usdPrice: null,
         cryptoPrice: goods.price,
         discount: goods.discount,
-        rate: cryptos.rate,
+        rate: cryptos.price,
         merchant_name: goods.merchant,
       };
     } else {
