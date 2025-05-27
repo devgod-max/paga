@@ -30,7 +30,7 @@ export default function RewardHistory({ data = [] }) {
   const totalTokens = data.reduce((sum, his) => sum + (his.tokens || 0), 0);
 
   return (
-    <section className="w-full max-w-6xl mx-auto mb-10 text-white">
+    <section className="w-full max-w-8xl mx-auto mb-10 text-white">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Reward History</h2>
         <p className="text-sm font-semibold text-cyan-400">
@@ -39,11 +39,11 @@ export default function RewardHistory({ data = [] }) {
         </p>
       </div>
 
-      <div className="bg-gradient-to-br from-[#1b1f2c] to-[#141925] border border-white/10 rounded-2xl overflow-hidden shadow-inner">
+      <div className=" border border-white/10 rounded-2xl overflow-hidden shadow-inner">
         {/* Gradient header row */}
         <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-sm font-semibold px-6 py-3 rounded-t-2xl grid grid-cols-4 gap-4">
           {columns.map((col, idx) => (
-            <div key={idx} className="whitespace-nowrap">
+            <div key={idx} className="whitespace-nowrap overflow-hidden">
               {col}
             </div>
           ))}

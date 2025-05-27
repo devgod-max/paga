@@ -27,7 +27,7 @@ const Table = ({
               className={`border-b border-white/10 last:border-0 ${rowClassName}`}
             >
               {Object.values(row).map((value, i) => (
-                <td key={i} className="p-3 whitespace-nowrap">
+                <td key={i} className="p-3 whitespace-nowrap overflow-hidden">
                   {value}
                 </td>
               ))}

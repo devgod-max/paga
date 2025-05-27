@@ -65,8 +65,8 @@ export default function PurchaseHistory({ data = [] }) {
     }));
 
   return (
-    <section className="w-full max-w-6xl mx-auto mb-10 text-white">
-      <div className="flex justify-between items-center mb-6">
+    <section className="w-full max-w-8xl mx-auto mb-10 text-white">
+      <div className="flex justify-between w-full mb-6 flex-wrap gap-4">
         <h2 className="text-2xl font-bold">Purchase History</h2>
 
         <div className="flex gap-2">
@@ -93,22 +93,30 @@ export default function PurchaseHistory({ data = [] }) {
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-[#1b1f2c] to-[#141925] border border-white/10 rounded-2xl overflow-hidden shadow-inner">
-        <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-sm font-semibold px-6 py-3 rounded-t-2xl grid grid-cols-7 gap-4">
-          {columns.map((col, idx) => (
-            <div key={idx} className="whitespace-nowrap">
-              {col}
-            </div>
-          ))}
-        </div>
+      {/* Scrollable Container */}
+      <div className="w-full overflow-x-auto">
+        <div className="border border-white/10 rounded-2xl overflow-hidden shadow-inner">
+          {/* Table Header */}
+          <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-sm font-semibold px-6 py-3 rounded-t-2xl grid grid-cols-7 gap-4">
+            {columns.map((col, idx) => (
+              <div
+                key={idx}
+                className="whitespace-nowrap text-center overflow-hidden"
+              >
+                {col}
+              </div>
+            ))}
+          </div>
 
-        <div className="divide-y divide-white/10">
-          <Table
-            columns={columns}
-            data={filteredData}
-            hideHeader
-            rowClassName="px-6 py-4 grid grid-cols-7 gap-4 items-center hover:bg-white/5 transition-all"
-          />
+          {/* Table Rows */}
+          <div className="divide-y divide-white/10">
+            <Table
+              columns={columns}
+              data={filteredData}
+              hideHeader
+              rowClassName="px-6 py-4 grid grid-cols-7 gap-4 items-center hover:bg-white/5 transition-all text-center"
+            />
+          </div>
         </div>
       </div>
     </section>
