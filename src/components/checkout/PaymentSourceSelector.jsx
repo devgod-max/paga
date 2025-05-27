@@ -328,7 +328,7 @@ export default function PaymentSelection() {
           }}
           className="mt-6 w-full py-2 border border-white text-white hover:bg-white/10 rounded-full"
         >
-          Go to the previous page
+          Go To Previous Page
         </button>
       </div>
     </div>

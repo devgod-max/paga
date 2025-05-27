@@ -56,7 +56,12 @@ export default function PaymentSummary() {
       const user = authUser.data?.user;
       if (!user) throw new Error("User not authenticated");
 
-      const rewardAmount = Math.floor(details.usdPrice * 0.05);
+      let rewardAmount = 0;
+      if (method === "crypto") {
+        rewardAmount = Math.floor(details.cryptoPrice * details.rate * 0.05);
+      } else {
+        rewardAmount = Math.floor(details.usdPrice * 0.05);
+      }
       const cryptoAmount =
         method === "crypto" ? details.cryptoPrice : details.usdPrice;
 
@@ -159,7 +164,7 @@ export default function PaymentSummary() {
             className="w-full md:w-auto flex items-center justify-center gap-2 border border-white text-white py-2 px-4 rounded-full hover:bg-white/10 transition"
           >
             <ArrowLeft size={16} />
-            Back To Previous Page
+            Go To Previous Page
           </button>
 
           <button
@@ -203,7 +208,7 @@ export default function PaymentSummary() {
             stacking. Spend smart. Get rewarded.
           </p>
           <p className="text-sm text-emerald-400 mb-4">
-            Your new balance: 150 tokens
+            You've earned new tokens!
           </p>
           <button
             onClick={() => navigate("/dashboard")}
