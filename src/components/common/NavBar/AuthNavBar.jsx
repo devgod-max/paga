@@ -13,17 +13,17 @@ export default function AuthNavbar({ role = "user", children }) {
       style={{ backgroundImage: "url('./assets/bg.png')" }}
     >
       {/* Header */}
-      <header className="w-full shadow-sm border-b border-white/10 sticky top-0 z-50 bg-black/60 backdrop-blur-sm">
+      <header className="w-full shadow-sm border-b border-white/30 sticky top-0 z-50 bg-black/30 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <h1
             onClick={() => navigate("/")}
             className="text-2xl font-bold cursor-pointer"
           >
-            🚀 PAGA
+            PAGA
           </h1>
 
           {/* Desktop Switch Link */}
-          <div className="hidden md:flex items-center gap-2 text-sm font-medium">
+          <div className="hidden md:flex items-center gap-2 text-md font-medium">
             {isUser ? (
               <>
                 <span>Are you a merchant?</span>
@@ -92,8 +92,8 @@ export default function AuthNavbar({ role = "user", children }) {
       </header>
 
       {/* Page content */}
-      <main className="flex-1 w-full flex items-center justify-center px-4 py-4">
-        <div className="w-full max-w-5xl">{children}</div>
+      <main className="flex-1 flex items-center justify-center">
+        <div className="w-full max-w-7xl">{children}</div>
       </main>
     </div>
   );

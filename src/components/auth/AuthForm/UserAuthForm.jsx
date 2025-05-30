@@ -49,7 +49,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
       {/* Google button */}
       <button
         type="button"
-        className="w-full border border-white/30 rounded-full py-3 flex items-center justify-center gap-2 text-sm font-medium hover:bg-white/10 transition text-white"
+        className="w-[60%] mx-auto border border-white rounded-full py-3 flex items-center justify-center gap-2 text-[18px] text-opacity-80 font-medium hover:bg-white/10 transition text-white"
       >
         <img
           src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -59,18 +59,18 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         Sign In with Google
       </button>
 
-      <div className="flex items-center gap-4 text-sm text-white/50">
-        <div className="flex-1 border-t border-white/20" />
+      <div className="flex items-center gap-4 text-[16px] text-[#f2f2f2] text-opacity-80">
+        <div className="flex-1 border-t border-[#f2f2f2] border-opacity-80" />
         <span>OR</span>
-        <div className="flex-1 border-t border-white/20" />
+        <div className="flex-1 border-t border-[#f2f2f2] border-opacity-80" />
       </div>
 
-      <h2 className="text-md font-semibold text-center text-white">
+      <h2 className="text-[24px] font-semibold text-center text-[#f2f2f2]">
         {isSignIn ? "Sign in to your account" : "Create your account"}
       </h2>
 
       {/* Email input */}
-      <div className="relative">
+      <div className="relative w-[60%] mx-auto">
         <Mail className="absolute left-4 top-3 text-white/50" size={18} />
         <input
           type="email"
@@ -82,17 +82,19 @@ export default function AuthForm({ isSignIn, toggleForm }) {
       </div>
 
       {!isSignIn && (
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Full Name"
-          className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        />
+        <div className="relative w-[60%] mx-auto">
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Full Name"
+            className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+        </div>
       )}
 
       {/* Password input */}
-      <div className="relative">
+      <div className="relative w-[60%] mx-auto">
         <Lock className="absolute left-4 top-3 text-white/50" size={18} />
         <input
           type={showPassword ? "text" : "password"}
@@ -112,13 +114,15 @@ export default function AuthForm({ isSignIn, toggleForm }) {
 
       {/* Confirm Password */}
       {!isSignIn && (
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm Password"
-          className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        />
+        <div className="relative w-[60%] mx-auto">
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+            className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+        </div>
       )}
 
       {/* Error Message Display */}
@@ -126,15 +130,19 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         <div className="text-sm text-red-400 text-center -mt-2">{error}</div>
       )}
 
-      <button
-        type="submit"
-        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-100 transition"
-      >
-        <span>{isSignIn ? "Sign In" : "Sign Up"}</span>
-        <ArrowRight size={18} />
-      </button>
+      <div className="relative w-[60%] mx-auto">
+        <button
+          type="submit"
+          className="w-full bg-white text-[#0f1b44] font-semibold rounded-full py-3 px-6 shadow-md hover:bg-gray-100 transition"
+        >
+          <span className="block text-center">Sign In</span>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-[#0f1b44]">
+            <ArrowRight size={16} className="text-white" />
+          </div>
+        </button>
+      </div>
 
-      <p className="text-sm text-center text-white/60">
+      <p className="text-[16px] text-center text-white/60">
         {isSignIn ? "Don’t have an account?" : "Already have an account?"}{" "}
         <button
           type="button"

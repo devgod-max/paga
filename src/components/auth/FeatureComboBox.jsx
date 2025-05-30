@@ -5,10 +5,10 @@ export default function FeatureComboBox({ title, content }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white shadow-md transition-all duration-300">
+    <div className="border border-[#d9d9d9] rounded-[20px] px-6 py-4 text-white shadow-md transition-all duration-300">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full text-left font-semibold text-white/90 hover:text-white"
+        className="flex items-center justify-between w-full text-left font-grifter text-[16px] text-white/90 hover:text-white"
       >
         <span>{title}</span>
         {open ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
