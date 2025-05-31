@@ -53,13 +53,13 @@ export default function MerchantNavbar() {
           <div className="hidden md:flex gap-4">
             <button
               onClick={() => navigate("/dashboard")}
-              className="text-sm font-medium text-white/80 hover:text-cyan-400 transition"
+              className="text-md font-medium text-white/80 hover:text-cyan-400 transition"
             >
               Dashboard
             </button>
             <button
               onClick={() => navigate("/checkout")}
-              className="text-sm font-medium text-white/80 hover:text-cyan-400 transition"
+              className="text-md font-medium text-white/80 hover:text-cyan-400 transition"
             >
               Checkout
             </button>
@@ -72,7 +72,7 @@ export default function MerchantNavbar() {
             <input
               type="text"
               placeholder="Search"
-              className="flex-1 bg-transparent outline-none text-sm text-white placeholder-white/60"
+              className="flex-1 bg-transparent outline-none text-md text-white placeholder-white/60"
             />
             <Search size={16} className="text-white" />
           </div>
@@ -84,7 +84,7 @@ export default function MerchantNavbar() {
           <div className="relative hidden md:block">
             <div
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-2 cursor-pointer text-sm text-white"
+              className="flex items-center gap-2 cursor-pointer text-md text-white"
             >
               <UserCircle size={22} className="text-cyan-400" />
               <span className="truncate max-w-[120px]">
@@ -120,7 +120,7 @@ export default function MerchantNavbar() {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 bg-[#1c1f26] border border-white/10 rounded-lg p-4 shadow text-sm space-y-2 text-white">
+        <div className="md:hidden mt-2 bg-[#1c1f26] border border-white/10 rounded-lg p-4 shadow text-md space-y-2 text-white">
           <button
             onClick={() => navigate("/dashboard")}
             className="block w-full text-left py-2 hover:underline"
