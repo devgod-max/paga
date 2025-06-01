@@ -23,27 +23,31 @@ export default function PaymentMethodSelector() {
   };
 
   return (
-    <div className="h-full max-w-7xl mx-auto px-4 py-12 text-white text-center">
+    <div className="h-full max-w-7xl mx-auto text-white text-center">
       {/* Welcome message */}
-      <h1 className="text-4xl font-bold mb-2 text-white">
-        Welcome {username}!
+      <h1 className="font-grifter font-bold mb-2 text-[#f2f2f2] text-[56px]">
+        Let's go!
       </h1>
-      <p className="text-base text-white/70 mb-10">
-        Pay your way. Earn along the way. Skip the friction. Pay with email or
-        wallet. 5 PAY tokens with this payment — let’s go.
+      <p className="text-[18px] text-[#f2f2f2] mb-10">
+        Pay your way — email or wallet. Earn 5 PAY tokens instantly with this
+        checkout.
       </p>
 
       {/* Payment options */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         <PaymentOptionCard
           title="Fast & secure"
+          description="Fastest checkout, best rewards"
           iconSrc="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum-icon-purple.svg"
           label="Pay"
           methodLabel="Crypto Currency"
+          highlight="Best Rewards"
           onClick={() => handleSelectMethod_1("crypto")}
         />
+
         <PaymentOptionCard
           title="Familiar & trusted"
+          description="Use your Visa or Mastercard"
           iconSrc="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
           label="Pay"
           methodLabel="Credit Card"
@@ -51,6 +55,7 @@ export default function PaymentMethodSelector() {
         />
         <PaymentOptionCard
           title="Low fees"
+          description="Low-fee transfer"
           iconSrc="https://img.icons8.com/color/48/bank.png"
           label="Pay"
           methodLabel="Bank Transfer"
@@ -59,7 +64,7 @@ export default function PaymentMethodSelector() {
       </div>
 
       {/* How it works */}
-      <h2 className="text-3xl font-bold mb-10 text-white">How It Works</h2>
+      <h2 className="text-5xl font-bold mb-10 text-white">How It Works</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
         {[...Array(4)].map((_, i) => {
           const steps = [
