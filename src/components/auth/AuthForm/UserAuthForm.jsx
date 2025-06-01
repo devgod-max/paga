@@ -49,7 +49,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
       {/* Google button */}
       <button
         type="button"
-        className="w-[60%] mx-auto border border-white rounded-full py-3 flex items-center justify-center gap-2 text-[18px] text-opacity-80 font-medium hover:bg-white/10 transition text-white"
+        className="w-[60%] mx-auto border border-white rounded-full py-3 flex items-center justify-center gap-2 text-[18px] text-opacity-80 font-aeonik hover:bg-white/10 transition text-white"
       >
         <img
           src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -59,13 +59,13 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         Sign In with Google
       </button>
 
-      <div className="flex items-center gap-4 text-[16px] text-[#f2f2f2] text-opacity-80">
+      <div className="flex items-center gap-4 text-[16px] font-grifter text-[#f2f2f2] text-opacity-80">
         <div className="flex-1 border-t border-[#f2f2f2] border-opacity-80" />
         <span>OR</span>
         <div className="flex-1 border-t border-[#f2f2f2] border-opacity-80" />
       </div>
 
-      <h2 className="text-[24px] font-semibold text-center text-[#f2f2f2]">
+      <h2 className="text-[24px] font-aeonik font-bold text-center text-[#f2f2f2]">
         {isSignIn ? "Sign in to your account" : "Create your account"}
       </h2>
 
@@ -127,7 +127,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
 
       {/* Confirm Password */}
       {!isSignIn && (
-        <div className="relative w-[60%] mx-auto">
+        <div className="font-aeonik relative w-[60%] mx-auto">
           <input
             type="password"
             value={confirmPassword}
@@ -146,7 +146,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
       <div className="relative w-[60%] mx-auto">
         <button
           type="submit"
-          className="w-full bg-white text-[#0f1b44] font-semibold rounded-full py-3 px-6 shadow-md hover:bg-gray-100 transition"
+          className="w-full bg-white text-[#0f1b44] font-gilroy font-bold rounded-full py-3 px-6 shadow-md hover:bg-gray-100 transition"
         >
           <span className="block text-center">
             {isSignIn ? "Sign In" : "Sign Up"}
@@ -162,7 +162,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         <button
           type="button"
           onClick={toggleForm}
-          className="text-cyan-300 hover:underline font-medium"
+          className="text-cyan-300 hover:underline font-aeonik"
         >
           {isSignIn ? "Sign Up" : "Sign In"}
         </button>

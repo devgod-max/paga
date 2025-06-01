@@ -107,13 +107,15 @@ export default function PaymentSummary() {
 
   return (
     <div className="h-full text-white px-4 py-12 flex flex-col items-center">
-      <h1 className="text-3xl font-bold text-center mb-1">
+      <h1 className="text-[59px] font-grifter font-bold text-center">
         Welcome {username}!
       </h1>
-      <p className="text-white/60 text-sm mb-8">Pay with {method}</p>
+      <p className="font-aeonik text-white/60 text-sm mb-8">
+        Pay with {method}
+      </p>
 
-      <div className="w-full max-w-2xl bg-[#1b1f2c] border border-white/10 rounded-2xl p-6 md:p-8">
-        <h2 className="text-xl font-semibold mb-4">Summary</h2>
+      <div className="w-full max-w-2xl bg-[#ffffff]/10 border border-white/10 rounded-2xl p-6 md:p-8">
+        <h2 className="font-grifter text-xl mb-4">Summary</h2>
 
         <div className="space-y-3 text-sm">
           <SummaryRow label="Item" value="1-month membership" />
@@ -158,7 +160,7 @@ export default function PaymentSummary() {
           <SummaryRow label="Discount" value="10% off merchant discount" />
         </div>
 
-        <div className="mt-6 flex flex-col md:flex-row gap-3 justify-between items-center">
+        <div className="mt-6 flex flex-col md:flex-row gap-3 justify-between items-center font-gilroy">
           <button
             onClick={goBack}
             className="w-full md:w-auto flex items-center justify-center gap-2 border border-white text-white py-2 px-4 rounded-full hover:bg-white/10 transition"
@@ -169,10 +171,16 @@ export default function PaymentSummary() {
 
           <button
             onClick={handlePayment}
-            className="w-full md:w-auto flex items-center justify-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-white font-semibold py-2 px-6 rounded-full transition"
+            className="group relative w-full md:w-auto flex items-center justify-center bg-white hover:bg-[#1fffd4]/80 text-[#0f1b44] font-bold py-3 pl-6 pr-14 rounded-full shadow-md  transition-all duration-300"
           >
             {buttonLabel}
-            <ArrowRight size={16} />
+
+            <span className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-[#1fffd4] group-hover:bg-[#f2f2f2]/80 transition-all duration-300">
+              <ArrowRight
+                size={16}
+                className="text-black transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300"
+              />
+            </span>
           </button>
         </div>
       </div>
@@ -180,10 +188,8 @@ export default function PaymentSummary() {
       {processing && (
         <Modal>
           <Loader2 className="animate-spin text-cyan-400 w-10 h-10 mb-4" />
-          <h3 className="text-lg font-semibold mb-1">
-            Processing Your Payment
-          </h3>
-          <p className="text-white/60 text-sm">
+          <h3 className="text-lg font-grifter mb-1">Processing Your Payment</h3>
+          <p className="text-white/60 font-aeonik text-sm">
             Waiting for wallet confirmation
           </p>
         </Modal>
@@ -192,8 +198,8 @@ export default function PaymentSummary() {
       {success && rewardsEarned !== null && (
         <Modal>
           <ShieldCheck className="w-10 h-10 text-green-400 mb-2" />
-          <h2 className="text-lg font-bold mb-1">Payment Successful!</h2>
-          <h3 className="text-lg font-semibold mb-1">
+          <h2 className="text-lg font-grifter mb-1">Payment Successful!</h2>
+          <h3 className="text-lg font-aeonik mb-1">
             Boom. You just got paid to pay.
           </h3>
           <p className="text-sm mb-4">
@@ -202,17 +208,17 @@ export default function PaymentSummary() {
           </p>
 
           <Gift className="w-10 h-10 text-cyan-400 mb-2" />
-          <h3 className="text-lg font-semibold mb-1">🎉 Congratulations!</h3>
-          <p className="text-sm mb-1">
+          <h3 className="text-lg font-grifter mb-1">🎉 Congratulations!</h3>
+          <p className="text-sm font-aeonik mb-1">
             Nice move. That’s another {rewardsEarned} PAY in your stack. Keep
             stacking. Spend smart. Get rewarded.
           </p>
-          <p className="text-sm text-emerald-400 mb-4">
+          <p className="text-sm font-aeonik text-emerald-400 mb-4">
             You've earned new tokens!
           </p>
           <button
             onClick={() => navigate("/dashboard")}
-            className="w-full border border-white text-white font-semibold py-2 rounded-full hover:bg-white/10 transition"
+            className="w-full border border-white text-white font-grifter py-2 rounded-full hover:bg-white/10 transition"
           >
             OK
           </button>
@@ -224,8 +230,8 @@ export default function PaymentSummary() {
 
 function SummaryRow({ label, value }) {
   return (
-    <div className="flex justify-between items-center px-4 py-2 rounded border border-white/10 bg-white/5">
-      <span className="font-medium text-white/90">{label}</span>
+    <div className="flex justify-between items-center font-aeonik px-4 py-2 rounded border border-white/10 bg-white/5">
+      <span className="text-white/90">{label}</span>
       <span className="text-emerald-400 text-sm">{value}</span>
     </div>
   );

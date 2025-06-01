@@ -39,10 +39,12 @@ export default function Dashboard() {
 
   return (
     <div className="w-full text-white px-4 py-10 md:px-12">
-      <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
+      <h1 className="text-[59px] md:text-4xl font-grifter font-bold mb-2 text-center">
         Welcome {user.name || "John Doe"}!
       </h1>
-      <p className="text-center text-sm text-gray-500 mb-10">Pay with Crypto</p>
+      <p className="text-center text-sm font-aeonik text-gray-500 mb-10">
+        Pay with Crypto
+      </p>
 
       <div className="max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">

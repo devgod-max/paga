@@ -17,13 +17,13 @@ export default function AuthNavbar({ role = "user", children }) {
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <h1
             onClick={() => navigate("/")}
-            className="text-2xl font-bold cursor-pointer"
+            className="text-2xl font-grifter cursor-pointer"
           >
             PAGA
           </h1>
 
           {/* Desktop Switch Link */}
-          <div className="hidden md:flex items-center gap-2 text-md font-medium">
+          <div className="hidden md:flex items-center gap-2 text-md font-aeonik">
             {isUser ? (
               <>
                 <span>Are you a merchant?</span>
@@ -68,7 +68,7 @@ export default function AuthNavbar({ role = "user", children }) {
                     setMenuOpen(false);
                     navigate("/merchant");
                   }}
-                  className="text-cyan-300 hover:underline font-medium"
+                  className="text-cyan-300 hover:underline font-aeonik"
                 >
                   Login here
                 </button>
@@ -81,7 +81,7 @@ export default function AuthNavbar({ role = "user", children }) {
                     setMenuOpen(false);
                     navigate("/");
                   }}
-                  className="text-cyan-300 hover:underline font-medium"
+                  className="text-cyan-300 hover:underline font-aeonik"
                 >
                   Login here
                 </button>

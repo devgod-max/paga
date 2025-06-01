@@ -28,7 +28,7 @@ export default function PaymentMethodSelector() {
       <h1 className="font-grifter font-bold mb-2 text-[#f2f2f2] text-[56px]">
         Let's go!
       </h1>
-      <p className="text-[18px] text-[#f2f2f2] mb-10">
+      <p className="text-[18px] font-aeonik text-[#f2f2f2] mb-10">
         Pay your way — email or wallet. Earn 5 PAY tokens instantly with this
         checkout.
       </p>
@@ -64,7 +64,7 @@ export default function PaymentMethodSelector() {
       </div>
 
       {/* How it works */}
-      <h2 className="text-5xl font-bold mb-10 text-white">How It Works</h2>
+      <h2 className="text-5xl font-grifter mb-10 text-white">How It Works</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
         {[...Array(4)].map((_, i) => {
           const steps = [
@@ -76,7 +76,7 @@ export default function PaymentMethodSelector() {
           return (
             <div
               key={i}
-              className="border border-white/10 rounded-2xl px-4 py-6 text-left bg-gradient-to-br from-[#1b1f2c] to-[#141925] text-white/80"
+              className="border border-white/10 rounded-2xl px-4 py-6 text-left bg-gradient-to-br from-[#1b1f2c] to-[#141925] font-aeonik text-white/80"
             >
               <p className="mb-2">{steps[i]}</p>
               <span className="font-bold text-cyan-300 text-2xl">{`0${

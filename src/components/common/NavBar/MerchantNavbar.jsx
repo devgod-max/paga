@@ -55,7 +55,7 @@ export default function MerchantNavbar() {
             <input
               type="text"
               placeholder="Search"
-              className="flex-1 bg-transparent outline-none text-md text-white placeholder-white/60"
+              className="flex-1 bg-transparent outline-none text-md font-aeonik text-white placeholder-white/60"
             />
             <Search size={16} className="text-white" />
           </div>
@@ -70,7 +70,7 @@ export default function MerchantNavbar() {
               className="flex items-center gap-2 cursor-pointer text-md text-white"
             >
               <UserCircle size={22} className="text-cyan-400" />
-              <span className="truncate max-w-[120px]">
+              <span className="truncate font-aeonik max-w-[120px]">
                 {user?.user_metadata.name}
               </span>
             </div>
@@ -78,7 +78,7 @@ export default function MerchantNavbar() {
             {dropdownOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute right-0 mt-2 w-40 bg-[#1c1f26] text-white border border-white/10 rounded-lg p-2 shadow z-50"
+                className="absolute right-0 mt-2 w-40 bg-[#1c1f26] font-aeonik text-white border border-white/10 rounded-lg p-2 shadow z-50"
               >
                 <button
                   onClick={handleLogout}
@@ -103,7 +103,7 @@ export default function MerchantNavbar() {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden mt-2 bg-[#1c1f26] border border-white/10 rounded-lg p-4 shadow text-md space-y-2 text-white">
+        <div className="md:hidden mt-2 bg-[#1c1f26] border border-white/10 rounded-lg p-4 shadow text-md space-y-2 font-aeonik text-white">
           <button
             onClick={() => navigate("/merchant/dashboard")}
             className="block w-full text-left py-2 hover:underline"

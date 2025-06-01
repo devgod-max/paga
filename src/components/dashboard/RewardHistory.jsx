@@ -11,12 +11,12 @@ export default function RewardHistory({ data = [] }) {
       day: "2-digit",
     }),
     reward_source: (
-      <span className="text-white font-medium whitespace-nowrap">
+      <span className="text-white font-aeonik whitespace-nowrap">
         {his.source}
       </span>
     ),
     tokens: (
-      <span className="text-emerald-400 font-semibold whitespace-nowrap">
+      <span className="text-emerald-400 font-aeonik whitespace-nowrap">
         {his.tokens}
       </span>
     ),
@@ -32,8 +32,8 @@ export default function RewardHistory({ data = [] }) {
   return (
     <section className="w-full max-w-8xl mx-auto mb-10 text-white">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Reward History</h2>
-        <p className="text-sm font-semibold text-cyan-400">
+        <h2 className="text-2xl font-grifter">Reward History</h2>
+        <p className="text-sm font-aeonik text-cyan-400">
           PAY earned so far{" "}
           <span className="text-emerald-400">{totalTokens}</span> Tokens
         </p>
@@ -41,7 +41,7 @@ export default function RewardHistory({ data = [] }) {
 
       <div className=" border border-white/10 rounded-2xl overflow-hidden shadow-inner">
         {/* Gradient header row */}
-        <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-sm font-semibold px-6 py-3 rounded-t-2xl grid grid-cols-4 gap-4">
+        <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-sm font-aeonik px-6 py-3 rounded-t-2xl grid grid-cols-4 gap-4">
           {columns.map((col, idx) => (
             <div key={idx} className="whitespace-nowrap overflow-hidden">
               {col}

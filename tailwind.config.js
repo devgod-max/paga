@@ -15,6 +15,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        grifter: ["Grifter", "sans-serif"],
+        aeonik: ["Aeonik", "sans-serif"],
+        gilroy: ["Gilroy", "sans-serif"],
       },
     },
   },

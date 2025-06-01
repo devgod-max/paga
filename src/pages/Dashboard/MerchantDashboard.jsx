@@ -60,33 +60,33 @@ export default function MerchantDashboard() {
         <div className="col-span-2 space-y-6">
           {/* Payout Summary */}
           <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 space-y-6 shadow-inner">
-            <h2 className="font-bold text-2xl text-white">Payout Summary</h2>
+            <h2 className="font-grifter text-2xl text-white">Payout Summary</h2>
             <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
-              <span className="text-white text-base font-medium">
+              <span className="text-white text-base font-aeonik">
                 Total Settled This Month
               </span>
-              <span className="text-[#00ffd1] font-semibold text-base">
+              <span className="text-[#00ffd1] font-aeonik text-base">
                 $10,000
               </span>
             </div>
             <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
-              <span className="text-white text-base font-medium">
+              <span className="text-white text-base font-aeonik">
                 Pending Payout
               </span>
-              <span className="text-[#00ffd1] font-semibold text-base">
+              <span className="text-[#00ffd1] font-aeonik text-base">
                 $2,000
               </span>
             </div>
             <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
-              <span className="text-white text-base font-medium">
+              <span className="text-white text-base font-aeonik">
                 Total Settled This Month
               </span>
-              <span className="text-[#00ffd1] font-semibold text-base">
+              <span className="text-[#00ffd1] font-aeonik text-base">
                 May 10, 2025
               </span>
             </div>
             <div className="mt-2">
-              <p className="text-sm font-semibold mb-2">Monthly Target</p>
+              <p className="text-sm font-aeonik mb-2">Monthly Target</p>
               <div className="relative w-full h-3 bg-[#404452] rounded-full">
                 <div
                   className="absolute top-0 left-0 h-full bg-[#00ffd1] rounded-full"
@@ -101,39 +101,37 @@ export default function MerchantDashboard() {
 
           {/* Rewards & Insights */}
           <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 space-y-6 shadow-inner">
-            <h2 className="font-bold text-2xl text-white">
+            <h2 className="font-grifter text-2xl text-white">
               Rewards & Insights
             </h2>
             <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
-              <span className="text-white text-base font-medium">
+              <span className="text-white text-base font-aeonik">
                 Total Rewards Given
               </span>
-              <span className="text-[#00ffd1] font-semibold text-base">
+              <span className="text-[#00ffd1] font-aeonik text-base">
                 500 Tokens
               </span>
             </div>
             <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
-              <span className="text-white text-base font-medium">
+              <span className="text-white text-base font-aeonik">
                 Most Popular Payment
               </span>
-              <span className="text-[#00ffd1] font-semibold text-base">
+              <span className="text-[#00ffd1] font-aeonik text-base">
                 Crypto
               </span>
             </div>
             <div className="bg-[#2a2e3a] px-6 py-5 rounded-[20px] flex justify-between items-center">
-              <span className="text-white text-base font-medium">
+              <span className="text-white text-base font-aeonik">
                 Transactions
               </span>
-              <span className="text-[#00ffd1] font-semibold text-base">
-                120
-              </span>
+              <span className="text-[#00ffd1] font-aeonik text-base">120</span>
             </div>
           </div>
         </div>
 
         {/* Total Sales */}
         <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 space-y-6 shadow-inner">
-          <h2 className="font-bold text-2xl text-white">Total Sales</h2>
+          <h2 className="font-grifter text-2xl text-white">Total Sales</h2>
           <div className="flex flex-col gap-6 items-center">
             <div className="w-full h-96">
               <ResponsiveContainer width="100%" height="100%">
@@ -163,7 +161,7 @@ export default function MerchantDashboard() {
                   key={i}
                   className="border border-white/10 bg-[#2a2e3a] rounded-full px-3 py-1 flex items-center gap-2 justify-between"
                 >
-                  <span className="font-medium text-white">{s.name}</span>
+                  <span className="font-aeonik text-white">{s.name}</span>
                   <span className="text-[#00ffd1]">${s.value.toFixed(0)}</span>
                 </div>
               ))}
@@ -174,17 +172,17 @@ export default function MerchantDashboard() {
 
       {/* Transactions Full Width */}
       <div className="rounded-[32px] bg-gradient-to-br from-[#1b1f2c] to-[#141925] p-6 overflow-auto shadow-inner">
-        <h2 className="font-bold text-2xl text-white mb-4">Transaction</h2>
+        <h2 className="font-grifter text-2xl text-white mb-4">Transaction</h2>
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gradient-to-r from-cyan-400 to-sky-500 text-white">
-              <th className="text-left py-3 px-4 rounded-l-full font-semibold">
+              <th className="text-left py-3 px-4 rounded-l-full font-aeonik">
                 Date
               </th>
-              <th className="text-left py-3 px-4 font-semibold">Customer</th>
-              <th className="text-left py-3 px-4 font-semibold">Amount</th>
-              <th className="text-left py-3 px-4 font-semibold">Method</th>
-              <th className="text-left py-3 px-4 rounded-r-full font-semibold">
+              <th className="text-left py-3 px-4 font-aeonik">Customer</th>
+              <th className="text-left py-3 px-4 font-aeonik">Amount</th>
+              <th className="text-left py-3 px-4 font-aeonik">Method</th>
+              <th className="text-left py-3 px-4 rounded-r-full font-aeonik">
                 Status
               </th>
             </tr>
@@ -205,7 +203,7 @@ export default function MerchantDashboard() {
                   <td className="py-4 px-4">{t.amount}</td>
                   <td className="py-4 px-4">{t.method}</td>
                   <td
-                    className={`py-4 px-4 rounded-r-xl font-semibold flex items-center gap-1 ${statusColor}`}
+                    className={`py-4 px-4 rounded-r-xl font-aeonik flex items-center gap-1 ${statusColor}`}
                   >
                     {t.status}
                     {isConfirmed && (

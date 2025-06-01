@@ -53,13 +53,13 @@ export default function MerchantNavbar() {
           <div className="hidden md:flex gap-4">
             <button
               onClick={() => navigate("/dashboard")}
-              className="text-md font-medium text-white/80 hover:text-cyan-400 transition"
+              className="text-md font-aeonik text-white/80 hover:text-cyan-400 transition"
             >
               Dashboard
             </button>
             <button
               onClick={() => navigate("/checkout")}
-              className="text-md font-medium text-white/80 hover:text-cyan-400 transition"
+              className="text-md font-aeonik text-white/80 hover:text-cyan-400 transition"
             >
               Checkout
             </button>
@@ -72,7 +72,7 @@ export default function MerchantNavbar() {
             <input
               type="text"
               placeholder="Search"
-              className="flex-1 bg-transparent outline-none text-md text-white placeholder-white/60"
+              className="flex-1 bg-transparent outline-none font-aeonik text-md text-white placeholder-white/60"
             />
             <Search size={16} className="text-white" />
           </div>
@@ -87,7 +87,7 @@ export default function MerchantNavbar() {
               className="flex items-center gap-2 cursor-pointer text-md text-white"
             >
               <UserCircle size={22} className="text-cyan-400" />
-              <span className="truncate max-w-[120px]">
+              <span className="truncate max-w-[120px] font-aeonik">
                 {user?.user_metadata.name}
               </span>
             </div>

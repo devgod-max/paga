@@ -47,7 +47,7 @@ export default function Auth() {
             Smarter Payments,
             <br /> Real Rewards.
           </div>
-          <p className="text-center text-[#F2F2F2] text-[18px] text-opacity-80 mt-2">
+          <p className="font-aeonik text-center text-[#F2F2F2] text-[18px] text-opacity-80 mt-2">
             Earn crypto rewards at checkout — no wallet required.
           </p>
           <AuthForm isSignIn={isSignIn} toggleForm={toggleForm} />

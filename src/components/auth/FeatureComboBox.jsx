@@ -5,7 +5,7 @@ export default function FeatureComboBox({ title, content }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-[#d9d9d9] rounded-[20px] px-6 py-4 text-white shadow-md transition-all duration-300">
+    <div className="border border-[#d9d9d9] rounded-[20px] px-6 py-4 text-white shadow-md transition-all duration-300 font-grifter">
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center justify-between w-full text-left font-grifter text-[16px] text-white/90 hover:text-white"

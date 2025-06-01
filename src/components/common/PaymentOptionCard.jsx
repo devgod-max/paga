@@ -28,14 +28,14 @@ export default function PaymentOptionCard({
 
       {/* Title and Method */}
       <div className="flex-grow mb-6">
-        <h3 className="text-[24px] font-black mb-1 text-white group-hover:text-white">
+        <h3 className="text-[24px] font-grifter mb-1 text-white group-hover:text-white">
           {title}
         </h3>
-        <h4 className="px-2 mb-2 text-white group-hover:text-white">
+        <h4 className="font-aeonik px-2 mb-2 text-white group-hover:text-white">
           {description}
         </h4>
         {methodLabel && (
-          <span className="inline-block text-xs bg-gradient-to-br from-[#1de9b6] to-[#008cff] text-white rounded-full px-3 py-0.5 font-medium group-hover:from-cyan-300 group-hover:to-blue-400">
+          <span className="inline-block text-xs bg-gradient-to-br from-[#1de9b6] to-[#008cff] text-white rounded-full px-3 py-0.5 font-aeonik group-hover:from-cyan-300 group-hover:to-blue-400">
             {methodLabel}
           </span>
         )}
@@ -44,7 +44,7 @@ export default function PaymentOptionCard({
       {/* Pay Button */}
       <button
         onClick={onClick}
-        className="w-full rounded-full py-2 text-sm h-12 font-semibold border border-white text-white bg-transparent group-hover:bg-[#008cff] transition-all duration-300"
+        className="w-full rounded-full py-2 text-sm h-12 font-gilroy font-[14px, bold] border border-white text-white bg-transparent group-hover:bg-[#008cff] transition-all duration-300"
       >
         {label}
       </button>

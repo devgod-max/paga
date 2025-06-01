@@ -49,16 +49,16 @@ export default function MerchantAuthForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 w-full max-w-md mx-auto text-white px-4 py-4"
+      className="space-y-6 mx-auto text-white px-4 py-4"
     >
-      <h1 className="text-4xl font-extrabold text-center leading-tight">
+      <h1 className="text-[56px] font-grifter text-center leading-tight">
         Smarter Payments,
         <br className="hidden sm:inline" /> Real Rewards.
       </h1>
 
       <button
         type="button"
-        className="w-full border border-white/30 rounded-full py-3 flex items-center justify-center gap-2 text-sm font-medium hover:bg-white/10 transition"
+        className="w-[60%] mx-auto border border-white/30 rounded-full py-3 flex items-center justify-center gap-2 text-sm font-aeonik hover:bg-white/10 transition"
       >
         <img
           src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -68,45 +68,47 @@ export default function MerchantAuthForm() {
         Sign In with Google
       </button>
 
-      <div className="flex items-center gap-4 text-sm text-white/50">
-        <div className="flex-1 border-t border-white/20" />
+      <div className="w-[60%] mx-auto flex items-center gap-4 font-gilroy text-sm text-[#f2f2f2]">
+        <div className="flex-1 border-t text-[#f2f2f2]" />
         <span>OR</span>
-        <div className="flex-1 border-t border-white/20" />
+        <div className="flex-1 border-t text-[#f2f2f2]" />
       </div>
 
-      <h2 className="text-center text-md font-semibold">
+      <h2 className="text-center text-md font-aeonik">
         {isSignIn ? "Sign in to your account" : "Create merchant account"}
       </h2>
 
-      <div className="relative">
+      <div className="w-[60%] mx-auto relative">
         <Mail className="absolute left-4 top-3 text-white/50" size={18} />
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email or Username"
-          className="w-full bg-white/10 text-white pl-12 pr-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full bg-white/10 font-aeonik text-white pl-12 pr-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
         />
       </div>
 
       {!isSignIn && (
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Business Name"
-          className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        />
+        <div className="w-[60%] mx-auto relative">
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Business Name"
+            className="w-full bg-white/10 font-aeonik text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+        </div>
       )}
 
-      <div className="relative">
+      <div className="w-[60%] mx-auto relative">
         <Lock className="absolute left-4 top-3 text-white/50" size={18} />
         <input
           type={showPassword ? "text" : "password"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="w-full bg-white/10 text-white pl-12 pr-10 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full bg-white/10 font-aeonik text-white pl-12 pr-10 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
         />
         <button
           type="button"
@@ -118,29 +120,36 @@ export default function MerchantAuthForm() {
       </div>
 
       {!isSignIn && (
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirm Password"
-          className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        />
+        <div className="w-[60%] mx-auto relative">
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+            className="w-full bg-white/10 font-aeonik text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+        </div>
       )}
 
       {/* Error Message Display */}
       {error && (
         <div className="text-sm text-red-400 text-center -mt-2">{error}</div>
       )}
+      <div className="relative w-[60%] mx-auto">
+        <button
+          type="submit"
+          className="w-full bg-white text-[#0f1b44] font-gilroy font-bold rounded-full py-3 px-6 shadow-md hover:bg-gray-100 transition"
+        >
+          <span className="block text-center">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </span>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-[#0f1b44]">
+            <ArrowRight size={16} className="text-white" />
+          </div>
+        </button>
+      </div>
 
-      <button
-        type="submit"
-        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-100 transition"
-      >
-        <span>{isSignIn ? "Sign In" : "Sign Up"}</span>
-        <ArrowRight size={18} />
-      </button>
-
-      <p className="text-sm text-center text-white/60">
+      <p className="font-aeonik text-sm text-center text-white/60">
         {isSignIn ? "Don’t have an account?" : "Already have an account?"}{" "}
         <button
           type="button"

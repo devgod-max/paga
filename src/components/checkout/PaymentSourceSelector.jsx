@@ -110,7 +110,7 @@ export default function PaymentSelection() {
 
   return (
     <div className="h-full px-4 py-12 flex flex-col items-center text-white">
-      <h1 className="text-2xl font-bold mb-2">
+      <h1 className="text-2xl font-grifter font-bold mb-2">
         {method_1 === "crypto"
           ? "What do you prefer?"
           : method_1 === "card"
@@ -122,7 +122,7 @@ export default function PaymentSelection() {
         <div className="flex gap-4 mb-6">
           <button
             onClick={() => setPaymentMethod_2("card")}
-            className={`px-4 py-2 rounded-full border transition font-semibold ${
+            className={`px-4 py-2 rounded-full border transition font-aeonik ${
               paymentMethod_2 === "card"
                 ? "bg-cyan-400 text-white"
                 : "bg-transparent border-white/20 text-white/70 hover:border-white/40"
@@ -132,7 +132,7 @@ export default function PaymentSelection() {
           </button>
           <button
             onClick={() => setPaymentMethod_2("bank")}
-            className={`px-4 py-2 rounded-full border transition font-semibold ${
+            className={`px-4 py-2 rounded-full border transition font-aeonik ${
               paymentMethod_2 === "bank"
                 ? "bg-cyan-400 text-white"
                 : "bg-transparent border-white/20 text-white/70 hover:border-white/40"
@@ -155,7 +155,7 @@ export default function PaymentSelection() {
                   : "bg-white/5 border-white/10"
               }`}
             >
-              <p className="text-lg font-medium text-white">
+              <p className="text-lg font-aeonik text-white">
                 {card.brand} •••• {card.last_4}
               </p>
               <p className="text-sm text-white/60">
@@ -175,7 +175,7 @@ export default function PaymentSelection() {
                   : "bg-white/5 border-white/10"
               }`}
             >
-              <p className="text-lg font-medium text-white">
+              <p className="text-lg font-aeonik text-white">
                 {bank.bank_name} — •••• {bank.account_number}
               </p>
               <p className="text-sm text-white/60">
@@ -190,7 +190,7 @@ export default function PaymentSelection() {
             (paymentMethod_2 === "card" && !pendingCard) ||
             (paymentMethod_2 === "bank" && !pendingBank)
           }
-          className={`w-full mt-2 font-semibold py-2 rounded-full transition ${
+          className={`w-full mt-2 font-aeonik py-2 rounded-full transition ${
             (paymentMethod_2 === "card" && pendingCard) ||
             (paymentMethod_2 === "bank" && pendingBank)
               ? "bg-emerald-400 text-white hover:bg-emerald-500"
@@ -201,7 +201,7 @@ export default function PaymentSelection() {
         </button>
 
         <div className="mt-6">
-          <h2 className="text-lg font-semibold mb-2">
+          <h2 className="text-lg font-aeonik mb-2">
             Register New {paymentMethod_2 === "card" ? "Card" : "Bank Account"}
           </h2>
 
@@ -258,7 +258,7 @@ export default function PaymentSelection() {
                 type="button"
                 onClick={handleCardRegister}
                 disabled={registering}
-                className={`w-full font-semibold py-2 rounded-full transition ${
+                className={`w-full font-aeonik py-2 rounded-full transition ${
                   registering
                     ? "bg-white/10 text-white/40 cursor-not-allowed"
                     : "bg-cyan-400 text-white hover:bg-cyan-500"
@@ -309,7 +309,7 @@ export default function PaymentSelection() {
                 type="button"
                 onClick={handleBankRegister}
                 disabled={registering}
-                className={`w-full font-semibold py-2 rounded-full transition ${
+                className={`w-full font-aeonik py-2 rounded-full transition ${
                   registering
                     ? "bg-white/10 text-white/40 cursor-not-allowed"
                     : "bg-cyan-400 text-white hover:bg-cyan-500"
