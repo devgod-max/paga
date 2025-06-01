@@ -77,7 +77,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email or Username"
-          className="w-full bg-white/10 text-white pl-12 pr-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full bg-white/10 text-white pl-12 pr-4 py-3 rounded-xl placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-cyan-400"
         />
       </div>
 
@@ -88,7 +88,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Full Name"
-            className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-cyan-400"
           />
         </div>
       )}
@@ -101,7 +101,7 @@ export default function AuthForm({ isSignIn, toggleForm }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="w-full bg-white/10 text-white pl-12 pr-10 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full bg-white/10 text-white pl-12 pr-10 py-3 rounded-xl placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-cyan-400"
         />
         <button
           type="button"
@@ -112,6 +112,19 @@ export default function AuthForm({ isSignIn, toggleForm }) {
         </button>
       </div>
 
+      {/* Forgot Password link */}
+      {isSignIn && (
+        <div className="w-[60%] mx-auto text-right">
+          <button
+            type="button"
+            className="text-sm text-cyan-300 hover:underline"
+            onClick={() => alert("Reset password flow to be implemented")}
+          >
+            Forgot Password?
+          </button>
+        </div>
+      )}
+
       {/* Confirm Password */}
       {!isSignIn && (
         <div className="relative w-[60%] mx-auto">
@@ -120,12 +133,12 @@ export default function AuthForm({ isSignIn, toggleForm }) {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm Password"
-            className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="w-full bg-white/10 text-white px-4 py-3 rounded-xl placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-cyan-400"
           />
         </div>
       )}
 
-      {/* Error Message Display */}
+      {/* Error Message */}
       {error && (
         <div className="text-sm text-red-400 text-center -mt-2">{error}</div>
       )}
@@ -135,7 +148,9 @@ export default function AuthForm({ isSignIn, toggleForm }) {
           type="submit"
           className="w-full bg-white text-[#0f1b44] font-semibold rounded-full py-3 px-6 shadow-md hover:bg-gray-100 transition"
         >
-          <span className="block text-center">Sign In</span>
+          <span className="block text-center">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </span>
           <div className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-[#0f1b44]">
             <ArrowRight size={16} className="text-white" />
           </div>

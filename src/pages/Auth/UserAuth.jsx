@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AuthForm from "../../components/auth/AuthForm/UserAuthForm";
 import FeatureComboBox from "../../components/auth/FeatureComboBox";
-import MobileTopIntro from "../../components/auth/MobileTopIntro";
 
 export default function Auth() {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -9,27 +8,21 @@ export default function Auth() {
 
   const features = [
     {
-      title: "Smarter Payments.",
+      title: "No Wallet Needed",
+      content: "Pay directly using your email — no crypto wallet required.",
+    },
+    {
+      title: "Instant Rewards",
+      content: "Earn cashback and tokens immediately after each transaction.",
+    },
+    {
+      title: "Crypto and Card Friendly",
       content:
-        "Streamlined checkout using modern payment tech for both fiat and crypto.",
+        "Pay with crypto or traditional cards — your choice, no friction.",
     },
     {
-      title: "Real Rewards.",
-      content:
-        "Get tangible rewards — cashback, tokens, or bonuses — with every transaction.",
-    },
-    {
-      title: "No Wallet Needed.",
-      content:
-        "Skip setting up a crypto wallet. Just use your email to pay securely.",
-    },
-    {
-      title: "Wallet optional.",
-      content: "Use one if you want — or not. The rewards don’t change.",
-    },
-    {
-      title: "Rewards guaranteed.",
-      content: "Every eligible payment is rewarded. No tricks, just perks.",
+      title: "Instant Sign Up",
+      content: "Create an account in seconds — no KYC, no hassle.",
     },
   ];
 
@@ -55,7 +48,7 @@ export default function Auth() {
             <br /> Real Rewards.
           </div>
           <p className="text-center text-[#F2F2F2] text-[18px] text-opacity-80 mt-2">
-            Start earning rewards with every checkout.
+            Earn crypto rewards at checkout — no wallet required.
           </p>
           <AuthForm isSignIn={isSignIn} toggleForm={toggleForm} />
         </div>
