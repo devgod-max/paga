@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Gift,
   Loader2,
+  RotateCcw,
 } from "lucide-react";
 
 import LoadingScreen from "../common/LoadingScreen";
@@ -94,6 +95,10 @@ export default function PaymentSummary() {
     } finally {
       setProcessing(false);
     }
+  };
+
+  const handleRefund = () => {
+    alert("Refund request submitted. This is a UI-only placeholder.");
   };
 
   const buttonLabel =
@@ -216,12 +221,21 @@ export default function PaymentSummary() {
           <p className="text-sm font-aeonik text-emerald-400 mb-4">
             You've earned new tokens!
           </p>
-          <button
-            onClick={() => navigate("/dashboard")}
-            className="w-full border border-white text-white font-grifter py-2 rounded-full hover:bg-white/10 transition"
-          >
-            OK
-          </button>
+
+          <div className="space-y-2">
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="w-full border border-white text-white font-grifter py-2 rounded-full hover:bg-white/10 transition"
+            >
+              OK
+            </button>
+            <button
+              onClick={handleRefund}
+              className="w-full border border-red-400 text-red-400 font-grifter py-2 rounded-full hover:bg-red-400 hover:text-white transition flex items-center justify-center gap-2"
+            >
+              <RotateCcw size={16} /> Request Refund
+            </button>
+          </div>
         </Modal>
       )}
     </div>
