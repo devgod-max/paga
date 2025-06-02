@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Auth from "../pages/Auth/UserAuth";
@@ -12,6 +12,7 @@ import AuthNavbar from "../components/common/NavBar/AuthNavBar";
 import PaymentSourceSelector from "../components/checkout/PaymentSourceSelector";
 import { PublicRoute, UserRoute, MerchantRoute } from "./ProtectedRoute";
 import LoadingScreen from "../components/common/LoadingScreenAuth";
+import PageNotFound from "../components/common/PageNotFound";
 
 export default function AppRouter() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -92,6 +93,9 @@ export default function AppRouter() {
           }
         />
       </Route>
+
+      {/* Catch-All Route */}
+      {/* <Route path="*" element={<PageNotFound />} /> */}
     </Routes>
   );
 }

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { setPaymentMethod_1 } from "../../redux/checkout/checkoutActions";
 
@@ -11,6 +11,16 @@ export default function PaymentMethodSelector() {
   const dispatch = useDispatch();
   const { status } = useSelector((status) => status.auth);
   const [username, setUsername] = useState("");
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+
+  const allParams = {};
+  queryParams.forEach((value, key) => {
+    allParams[key] = value;
+  });
+
+  console.log(allParams);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("authUser"));

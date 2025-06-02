@@ -1,10 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export function PublicRoute({ user }) {
   const role = user?.user_metadata?.role;
 
   if (user) {
-    // Redirect based on role
     return (
       <Navigate
         to={role === "merchant" ? "/merchant/dashboard" : "/checkout"}
@@ -17,13 +16,35 @@ export function PublicRoute({ user }) {
 }
 
 export function UserRoute({ user }) {
-  if (!user) return <Navigate to="/" replace />;
+  const location = useLocation();
+
+  if (!user) {
+    return (
+      <Navigate
+        to={`/?redirect=${encodeURIComponent(
+          location.pathname + location.search
+        )}`}
+        replace
+      />
+    );
+  }
+
   const role = user?.user_metadata?.role;
   return role === "user" ? <Outlet /> : <Navigate to="/" replace />;
 }
 
 export function MerchantRoute({ user }) {
-  if (!user) return <Navigate to="/merchant" replace />;
+  const location = useLocation();
+
+  if (!user) {
+    return (
+      <Navigate
+        to={`/merchant?redirect=${encodeURIComponent(location.pathname)}`}
+        replace
+      />
+    );
+  }
+
   const role = user?.user_metadata?.role;
   return role === "merchant" ? <Outlet /> : <Navigate to="/merchant" replace />;
 }

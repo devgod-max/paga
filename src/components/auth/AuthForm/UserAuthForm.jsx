@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../../../redux/auth/actions";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 
-export default function AuthForm({ isSignIn, toggleForm }) {
+export default function AuthForm({ isSignIn, toggleForm, redirectPath }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,14 +30,14 @@ export default function AuthForm({ isSignIn, toggleForm }) {
     try {
       if (isSignIn) {
         await dispatch(login(email, password, "user"));
-        navigate("/checkout");
+        navigate(redirectPath);
       } else {
         if (password !== confirmPassword) {
           setError("Passwords do not match.");
           return;
         }
         await dispatch(signup(email, username, "user", password));
-        navigate("/checkout");
+        navigate(redirectPath);
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");

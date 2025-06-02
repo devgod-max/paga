@@ -8,10 +8,7 @@ export default function AuthNavbar({ role = "user", children }) {
   const isUser = role === "user";
 
   return (
-    <div
-      className="w-full min-h-screen overflow-x-hidden flex flex-col bg-cover bg-center text-white"
-      style={{ backgroundImage: "url('./assets/bg.png')" }}
-    >
+    <div className="w-full min-h-screen overflow-x-hidden flex flex-col bg-cover bg-center text-white">
       {/* Header */}
       <header className="w-full shadow-sm border-b border-white/30 sticky top-0 z-50 bg-black/30 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
