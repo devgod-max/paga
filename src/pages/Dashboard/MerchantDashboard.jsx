@@ -1,6 +1,8 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { QRCodeSVG } from "qrcode.react";
+import { Dialog } from "@headlessui/react";
 
 const COLORS = [
   "#00C49F",
@@ -54,8 +56,42 @@ export default function MerchantDashboard() {
     },
   ]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const staticUrl =
+    "https://paga-alpha.vercel.app/checkout?merchantId=e305bb4c-5f13-49a0-8a28-3258f5b6b657&customerId=5ed89014-c11d-4aca-b492-b3c8c1550d6b&itemId=abc123&quantity=2&price=50&total=100&discount=10&successUrl=https%3A%2F%2Fpaga-alpha.vercel.app%2Fsuccess%3Fsession_id%3D%7BCHECKOUT_SESSION_ID%7D";
+
   return (
     <div className="h-full text-white px-4 py-6 space-y-6 max-w-7xl mx-auto">
+      <div className="flex justify-end">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-[#00ffd1] text-black font-bold px-6 py-2 rounded-full shadow hover:bg-cyan-300 transition"
+        >
+          Generate QR Code
+        </button>
+      </div>
+
+      <Dialog
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+          <Dialog.Panel className="bg-white p-6 rounded-2xl shadow-xl text-center">
+            <Dialog.Title className="text-lg font-bold mb-4 text-black">
+              Scan to Pay
+            </Dialog.Title>
+            <QRCodeSVG value={staticUrl} size={200} />
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="mt-4 px-4 py-2 bg-black text-white rounded-full"
+            >
+              Close
+            </button>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="col-span-2 space-y-6">
           {/* Payout Summary */}
