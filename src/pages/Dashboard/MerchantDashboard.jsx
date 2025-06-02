@@ -28,28 +28,28 @@ export default function MerchantDashboard() {
   const [transactions] = useState([
     {
       date: "April 23",
-      customer: "John Doe",
+      customer: "Alex Carter",
       amount: "$200.00",
       method: "Credit",
       status: "Confirmed",
     },
     {
       date: "April 22",
-      customer: "John Doe",
+      customer: "JRyan Lee",
       amount: "0.05 BT",
       method: "Crypto",
       status: "Confirmed",
     },
     {
       date: "April 22",
-      customer: "John Doe",
+      customer: "Emma Reed",
       amount: "$150.00",
       method: "Bank",
       status: "Transfer Refund",
     },
     {
       date: "April 21",
-      customer: "John Doe",
+      customer: "Mia Blake",
       amount: "$75.00",
       method: "Credit",
       status: "Confirmed",
@@ -114,12 +114,10 @@ export default function MerchantDashboard() {
               </span>
             </div>
             <div className="bg-[#f2f2f2]/10 px-6 py-5 rounded-[20px] flex justify-between items-center">
-              <span className="text-white text-base font-aeonik">
-                Total Settled This Month
+              <span className="text-red-500 text-base font-aeonik">
+                Refunds Processed
               </span>
-              <span className="text-[#00ffd1] font-aeonik text-base">
-                May 10, 2025
-              </span>
+              <span className="text-red-500 font-aeonik text-base">$150</span>
             </div>
             <div className="mt-2">
               <p className="text-sm font-aeonik mb-2">Monthly Target</p>
