@@ -98,7 +98,7 @@ export default function PaymentSummary() {
   };
 
   const handleRefund = () => {
-    alert("Refund request submitted. This is a UI-only placeholder.");
+    alert("Refund request submitted. Refund functionality coming soon.");
   };
 
   const buttonLabel =
@@ -113,7 +113,7 @@ export default function PaymentSummary() {
   return (
     <div className="h-full text-white px-4 py-12 flex flex-col items-center">
       <h1 className="text-[59px] font-grifter font-bold text-center">
-        Welcome {username}!
+        Manage your Rewards and Payments
       </h1>
       <p className="font-aeonik text-white/60 text-sm mb-8">
         Pay with {method}
@@ -158,9 +158,10 @@ export default function PaymentSummary() {
           />
           <SummaryRow
             label="Rewards"
-            value={`5% cashback = ${
-              rewardsEarned ?? (details?.usdPrice * 0.05).toFixed(0)
-            } tokens`}
+            // value={`5% cashback = ${
+            //   rewardsEarned ?? (details?.usdPrice * 0.05).toFixed(0)
+            // } tokens`}
+            value="5% cashback = 5 tokens"
           />
           <SummaryRow label="Discount" value="10% off merchant discount" />
         </div>

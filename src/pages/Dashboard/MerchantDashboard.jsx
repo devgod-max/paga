@@ -35,7 +35,7 @@ export default function MerchantDashboard() {
     },
     {
       date: "April 22",
-      customer: "JRyan Lee",
+      customer: "Ryan Lee",
       amount: "0.05 BT",
       method: "Crypto",
       status: "Confirmed",
@@ -120,7 +120,7 @@ export default function MerchantDashboard() {
               <span className="text-red-500 font-aeonik text-base">$150</span>
             </div>
             <div className="mt-2">
-              <p className="text-sm font-aeonik mb-2">Monthly Target</p>
+              <p className="text-sm font-aeonik mb-2">Your Sales Goal</p>
               <div className="relative w-full h-3 bg-[#404452] rounded-full">
                 <div
                   className="absolute top-0 left-0 h-full bg-[#00ffd1] rounded-full"
@@ -150,9 +150,7 @@ export default function MerchantDashboard() {
               <span className="text-white text-base font-aeonik">
                 Most Popular Payment
               </span>
-              <span className="text-[#00ffd1] font-aeonik text-base">
-                Crypto
-              </span>
+              <span className="text-[#00ffd1] font-aeonik text-base">USDC</span>
             </div>
             <div className="bg-[#f2f2f2]/10 px-6 py-5 rounded-[20px] flex justify-between items-center">
               <span className="text-white text-base font-aeonik">

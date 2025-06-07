@@ -56,7 +56,7 @@ export default function AuthForm({ isSignIn, toggleForm, redirectPath }) {
           alt="Google"
           className="w-5 h-5"
         />
-        Sign In with Google
+        Log in with Google
       </button>
 
       <div className="flex items-center gap-4 text-[16px] font-grifter text-[#f2f2f2] text-opacity-80">
@@ -66,7 +66,7 @@ export default function AuthForm({ isSignIn, toggleForm, redirectPath }) {
       </div>
 
       <h2 className="text-[24px] font-aeonik font-bold text-center text-[#f2f2f2]">
-        {isSignIn ? "Sign in to your account" : "Create your account"}
+        {isSignIn ? "Log in" : "Create your account"}
       </h2>
 
       {/* Email input */}
@@ -149,7 +149,7 @@ export default function AuthForm({ isSignIn, toggleForm, redirectPath }) {
           className="w-full bg-white text-[#0f1b44] font-gilroy font-bold rounded-full py-3 px-6 shadow-md hover:bg-gray-100 transition"
         >
           <span className="block text-center">
-            {isSignIn ? "Sign In" : "Sign Up"}
+            {isSignIn ? "Log in" : "Sign Up"}
           </span>
           <div className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-[#0f1b44]">
             <ArrowRight size={16} className="text-white" />
@@ -164,7 +164,7 @@ export default function AuthForm({ isSignIn, toggleForm, redirectPath }) {
           onClick={toggleForm}
           className="text-cyan-300 hover:underline font-aeonik"
         >
-          {isSignIn ? "Sign Up" : "Sign In"}
+          {isSignIn ? "Sign Up" : "Log in"}
         </button>
       </p>
     </form>

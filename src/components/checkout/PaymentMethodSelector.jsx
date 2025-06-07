@@ -36,18 +36,17 @@ export default function PaymentMethodSelector() {
     <div className="h-full max-w-7xl mx-auto text-white text-center">
       {/* Welcome message */}
       <h1 className="font-grifter font-bold mb-2 text-[#f2f2f2] text-[56px]">
-        Let's go!
+        Ready to pay?
       </h1>
       <p className="text-[18px] font-aeonik text-[#f2f2f2] mb-10">
-        Pay your way — email or wallet. Earn 5 PAY tokens instantly with this
-        checkout.
+        Choose how to pay — no wallet needed. Earn 5 PAY tokens instantly.
       </p>
 
       {/* Payment options */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         <PaymentOptionCard
           title="Fast & secure"
-          description="Fastest checkout, best rewards"
+          description="Fastest Checkout, highest rewards"
           iconSrc="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum-icon-purple.svg"
           label="Pay"
           methodLabel="Crypto Currency"
@@ -65,7 +64,7 @@ export default function PaymentMethodSelector() {
         />
         <PaymentOptionCard
           title="Low fees"
-          description="Low-fee transfer"
+          description="Skip the high fees"
           iconSrc="https://img.icons8.com/color/48/bank.png"
           label="Pay"
           methodLabel="Bank Transfer"
@@ -78,10 +77,10 @@ export default function PaymentMethodSelector() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
         {[...Array(4)].map((_, i) => {
           const steps = [
-            "Sign in with email - No wallet or keys required",
+            "Sign in with your email — no wallet, no keys, no hassle",
             "Choose how to pay - Crypto, card, or bank",
-            "Complete your payment - Instant confirmation",
-            "Earn rewards - Get tokens, discounts & more",
+            "Pay in seconds — instant confirmation",
+            "Earn tokens, cashback & exclusive perks",
           ];
           return (
             <div

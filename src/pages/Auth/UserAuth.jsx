@@ -28,7 +28,7 @@ export default function Auth() {
     },
     {
       title: "Instant Sign Up",
-      content: "Create an account in seconds — no KYC, no hassle.",
+      content: "Create your account in seconds — no wallet or app needed.",
     },
   ];
 

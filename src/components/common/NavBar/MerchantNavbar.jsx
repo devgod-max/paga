@@ -43,11 +43,12 @@ export default function MerchantNavbar() {
     <header className="w-full bg-gradient-to-r from-[#1b1f2c] to-[#0f2936] border border-white/10 rounded-full p-2 px-4 shadow-inner mt-4 max-w-6xl mx-auto">
       <div className="flex items-center justify-between gap-4">
         {/* Logo */}
-        <div className="flex items-center">
-          <button onClick={() => navigate("/merchant/dashboard")}>
-            <CircleDot className="w-6 h-6 text-white" />
-          </button>
-        </div>
+        <h1
+          onClick={() => navigate("/dashboard")}
+          className="text-2xl h-6 font-grifter cursor-pointer text-cyan-300"
+        >
+          PAGA
+        </h1>
 
         {/* Search - Desktop only */}
         <div className="ml-auto hidden md:flex items-center justify-end">
