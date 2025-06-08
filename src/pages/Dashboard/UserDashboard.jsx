@@ -39,7 +39,7 @@ export default function Dashboard() {
 
   return (
     <div className="w-full text-white px-4 py-10 md:px-12">
-      <h1 className="text-[59px] md:text-4xl font-grifter font-bold mb-2 text-center">
+      <h1 className="text-[40px] md:text-[59px] font-grifter font-bold mb-2 text-center">
         Manage your Rewards and Payments
       </h1>
       <p className="text-center text-sm font-aeonik text-gray-500 mb-10">

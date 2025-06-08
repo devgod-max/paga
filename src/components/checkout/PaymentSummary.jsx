@@ -112,7 +112,7 @@ export default function PaymentSummary() {
 
   return (
     <div className="h-full text-white px-4 py-12 flex flex-col items-center">
-      <h1 className="text-[59px] font-grifter font-bold text-center">
+      <h1 className="text-[40px] md:text-[59px] font-grifter font-bold text-center">
         Confirm your purchase
       </h1>
       <p className="font-aeonik text-white/60 text-sm mb-8">

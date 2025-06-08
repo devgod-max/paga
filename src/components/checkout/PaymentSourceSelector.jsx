@@ -110,7 +110,7 @@ export default function PaymentSelection() {
 
   return (
     <div className="h-full px-4 py-12 flex flex-col items-center text-white">
-      <h1 className="text-[59px] text-center font-grifter font-bold mb-2">
+      <h1 className="text-[40px] md:text-[59px] text-center font-grifter font-bold mb-2">
         {method_1 === "crypto"
           ? "Choose your payment method"
           : method_1 === "card"

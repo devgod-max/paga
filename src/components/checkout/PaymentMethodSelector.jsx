@@ -20,8 +20,6 @@ export default function PaymentMethodSelector() {
     allParams[key] = value;
   });
 
-  console.log(allParams);
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("authUser"));
     setUsername(user.user_metadata.name);
@@ -35,7 +33,7 @@ export default function PaymentMethodSelector() {
   return (
     <div className="h-full max-w-7xl mx-auto text-white text-center">
       {/* Welcome message */}
-      <h1 className="font-grifter font-bold mb-2 text-[#f2f2f2] text-[56px]">
+      <h1 className="font-grifter font-bold mb-2 text-[#f2f2f2] text-[40px] md:text-[59px]">
         Ready to pay?
       </h1>
       <p className="text-[18px] font-aeonik text-[#f2f2f2] mb-10">
@@ -73,7 +71,9 @@ export default function PaymentMethodSelector() {
       </div>
 
       {/* How it works */}
-      <h2 className="text-5xl font-grifter mb-10 text-white">How It Works</h2>
+      <h2 className="text-4xl md:text-5xl font-grifter mb-10 text-white">
+        How It Works
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
         {[...Array(4)].map((_, i) => {
           const steps = [
